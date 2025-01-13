@@ -1,0 +1,70 @@
+.userlist-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.userlist-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.userlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: scroll;
+}
+
+.userlist-table th, .userlist-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.userlist-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.userlist-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.userlist-action {
+    display: flex;
+    justify-content: center;
+}
+
+.userlist-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.userlist-button.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.userlist-button:hover {
+    opacity: 0.8;
+}
+.userlist-search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  

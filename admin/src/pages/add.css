@@ -1,0 +1,115 @@
+/* Form Container */
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    padding-top:0px;
+    max-width: 1150px;
+    margin: auto;
+    border-radius: 10px;
+    margin-right:60px;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 80vh;
+    position: relative;
+}
+.add-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.add-input,
+.add-textarea,
+.add-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Image Upload Section */
+.add-upload-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.add-upload-label {
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+.add-upload-img {
+    display: block;
+    width: 90px;
+    height: auto;
+    margin: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.add-upload-label:hover .add-upload-img {
+    transform: scale(1.1);
+}
+
+/* Textarea Styling */
+.add-textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* Align Category and Price in a single row */
+.add-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.add-row div {
+    flex: 1;
+}
+
+/* Select Dropdown */
+.add-select {
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Add Item Button */
+.add-button {
+    width: 20%;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #363636;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-button:hover {
+    background-color: #0a0a0a;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    .add-form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .add-upload-img {
+        width: 80px;
+    }
+
+    .add-row {
+        flex-direction: column;
+    }
+}

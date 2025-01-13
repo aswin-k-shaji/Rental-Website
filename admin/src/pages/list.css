@@ -1,0 +1,96 @@
+.list-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 78vh;
+  position: relative;
+}
+
+.list-table-wrapper {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; 
+}
+
+.list-table thead {
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4;
+  z-index: 10;
+}
+
+.list-table th, .list-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.list-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.list-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.list-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.list-action {
+  gap: 10px;
+  /* height:80px; */
+}
+
+.list-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.list-button.edit {
+  background-color: #4caf50;
+  color: white;
+}
+
+.list-button.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.list-button:hover {
+  opacity: 0.8;
+}
+
+.list-search {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.list-search:focus {
+  border-color: #007bff;
+  outline: none;
+}

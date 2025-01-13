@@ -1,0 +1,50 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Centering the Home Page */
+.container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Styling for individual cards */
+.MuiCard-root {
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.MuiCard-root:hover {
+  transform: scale(1.05);
+}
+
+/* Button Styling */
+button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #1565c0;
+  color: white;
+}
+
+/* Footer Styling */
+footer {
+  background: #1976d2;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
