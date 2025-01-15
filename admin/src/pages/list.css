@@ -94,3 +94,13 @@
   border-color: #007bff;
   outline: none;
 }
+.product-link {
+  text-decoration: none;
+  color: blue;
+  font-weight: bold;
+}
+
+.product-link:hover {
+  text-decoration: underline;
+  color: darkblue;
+}

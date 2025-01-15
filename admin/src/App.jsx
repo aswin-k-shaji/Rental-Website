@@ -8,6 +8,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './components/Login'
 import { ToastContainer } from 'react-toastify'
 import UserList from './pages/UserList'
+import SingleItem from './pages/SingleItem'
 // import AddUser from './pages/Adduser'
 
 
@@ -40,6 +41,7 @@ const App = () => {
                 <Route path='/Orders' element={<Orders token={token} />} />
                 <Route path='/users' element={<UserList token={token} />} />
                 <Route path='/' element={<Navigate to='/List'/>} />
+                <Route path="/product/:id" element={<SingleItem />} />
               </Routes>
             </div>
           </div>

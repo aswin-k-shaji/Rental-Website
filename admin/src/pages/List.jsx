@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
+import { NavLink } from 'react-router-dom';
 import './list.css';
 
 const List = ({ token }) => {
@@ -24,7 +25,6 @@ const List = ({ token }) => {
 
   const removeProduct = async (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this item?");
-
     if (!isConfirmed) return;
 
     try {
@@ -88,11 +88,15 @@ const List = ({ token }) => {
               <td>
                 <img src={item.image[0]} alt={item.title} className="list-image" />
               </td>
-              <td>{item.title}</td>
+              <td>
+                {/* ✅ Clicking the product name redirects to SingleItem page */}
+                <NavLink to={`/product/${item._id}`} className="product-link">
+                  {item.title}
+                </NavLink>
+              </td>
               <td>{item.category}</td>
               <td>{item.pricePerDay} Rs</td>
               <td className="list-action">
-                <button className="list-button edit">Edit</button>
                 <button
                   onClick={() => removeProduct(item._id)}
                   className="list-button delete"
