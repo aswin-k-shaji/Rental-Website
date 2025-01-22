@@ -1,0 +1,179 @@
+.single-item-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+
+    justify-content:space-evenly;
+    padding-top: 50px;
+}
+
+.left-content{
+    display:flex;
+    flex-direction: column;
+    justify-content:start;
+    height:100%;
+    width: auto;
+    width:700px;
+
+
+}
+.image-section {
+    position: relative;
+    width: 95%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}   
+
+.nav-button {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 10px;
+}
+
+.prev-button {
+    left: 0;
+}
+
+.next-button {
+    right: 0;
+}
+
+.main-image {
+    width: 500px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    object-fit: cover; /* Maintain aspect ratio while covering the box */
+    margin: 0;
+    
+}
+
+.thumbnail-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.active-thumbnail {
+    border: 2px solid #007bff;
+}
+
+.product-info {
+    max-width: 600px;
+    height:700px;
+    text-align: left; /* Align text to the left */
+}
+
+.breadcrumb {
+    font-size: 1rem;
+    color: #6c757d; /* Gray color for breadcrumb */
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 1.8rem;
+    color: #343a40; /* Darker color for price */
+    margin-bottom: 20px;
+}
+
+.price-value {
+    color: black;
+    font-weight: 700;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+}
+
+.back-button,
+.rent-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
+    background-color: #f0f0f0;
+}
+
+.back-button:hover {
+    background-color: #e0e0e0;
+}
+
+.rent-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.rent-button:hover {
+    background-color: #0056b3;
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 20px;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns items to the top in a column layout */
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.main1 {
+    margin-bottom: 20px;
+    align-self: flex-start; /* Ensures alignment at the top */
+}
+
+.price-value {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.main2 {
+    font-size: 1rem;
+    color: #555;
+    align-self: flex-start; /* Ensures alignment at the top */
+}
+
+
