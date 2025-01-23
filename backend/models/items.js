@@ -11,7 +11,7 @@ const itemSchema = new mongoose.Schema({
   },
   pricePerDay: {type: Number,required: true,},
   location:{type: String,required: true,},
-  contact:{type:Number,required:true},
+  contact:{type:Number,unique: true,required:true},
   image:{type:Array,required:true},
   date: { type: Number, default: Date.now }
 });

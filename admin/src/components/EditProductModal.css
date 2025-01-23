@@ -3,20 +3,20 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .modal {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
+    width: 900px;
+    height:100%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     display: flex;
+    overflow: scroll;
     flex-direction: column;
     gap: 10px;
 }
@@ -87,4 +87,57 @@
 .modal-buttons button:last-child {
     background: #dc3545;
     color: white;
+}
+.image-upload-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.image-upload-label {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.image-upload-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.loading-spinner {
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

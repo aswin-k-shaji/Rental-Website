@@ -1,0 +1,15 @@
+.title-container {
+    text-align: center;
+    margin: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .title-text {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .title-span {
+    color: #717273;
+  }
+  

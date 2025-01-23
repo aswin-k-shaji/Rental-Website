@@ -1,0 +1,10 @@
+.home{
+    background-color: rgb(227, 255, 255);
+    padding-top:1px;
+}
+.home2{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}

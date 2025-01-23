@@ -36,12 +36,10 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-header">
           <div className="hero-tag">
-            <p className="highlight"></p>
             <p className="offer"></p>
           </div>
           <h1 className="hero-title">
-            <span></span>
-            <br />Rental Items
+           Rental Items
           </h1>
         </div>
         <div className="hero-cta">

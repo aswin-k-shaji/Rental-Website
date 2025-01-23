@@ -8,8 +8,11 @@ import './list.css';
 const List = ({ token }) => {
   const [list, setList] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
 
   const fetchList = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(backendUrl + '/api/product/list');
       if (res.data.success) {
@@ -20,6 +23,8 @@ const List = ({ token }) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -27,13 +32,14 @@ const List = ({ token }) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this item?");
     if (!isConfirmed) return;
 
+    setDeletingId(id);
+
     try {
       const res = await axios.post(
         backendUrl + '/api/product/remove',
         { id },
         { headers: { token } }
       );
-
       if (res.data.success) {
         toast.success(res.data.message);
         await fetchList();
@@ -43,6 +49,8 @@ const List = ({ token }) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -62,6 +70,13 @@ const List = ({ token }) => {
 
   return (
     <div className="list-container">
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <p>Loading products, please wait...</p>
+        </div>
+      )}
+
       <p className="list-title">All Products List</p>
 
       <input
@@ -89,7 +104,6 @@ const List = ({ token }) => {
                 <img src={item.image[0]} alt={item.title} className="list-image" />
               </td>
               <td>
-                {/* ✅ Clicking the product name redirects to SingleItem page */}
                 <NavLink to={`/product/${item._id}`} className="product-link">
                   {item.title}
                 </NavLink>
@@ -100,8 +114,9 @@ const List = ({ token }) => {
                 <button
                   onClick={() => removeProduct(item._id)}
                   className="list-button delete"
+                  disabled={deletingId === item._id}
                 >
-                  Delete
+                  {deletingId === item._id ? 'Deleting...' : 'Delete'}
                 </button>
               </td>
             </tr>

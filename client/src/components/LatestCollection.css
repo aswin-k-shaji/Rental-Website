@@ -1,0 +1,42 @@
+.latest-collection {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  .latest-collection-title {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .latest-collection-title p {
+    font-size: 18px;
+    color: #555;
+  }
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding:0px 70px;
+  }
+  .card {
+    border-radius: 3px;
+    text-align: center;
+  }
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .card img {
+    width: 100%;
+    border-radius: 3px;
+  }
+  .card p {
+    margin: 8px 0;
+  }
+  .card p:first-of-type {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .card p:last-of-type {
+    color: #007BFF;
+    font-size: 1.1em;
+  }
+  
