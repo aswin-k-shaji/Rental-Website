@@ -3,7 +3,6 @@ import Hero from '../components/hero'
 import Content from '../components/Content'
 import './home.css'
 import LatestCollection from '../components/LatestCollection'
-import Footer from '../components/Footer'
 
 
 const Home = () => {
@@ -16,7 +15,6 @@ const Home = () => {
         <div>
             <Content/>
         </div>
-        <Footer/>
     </div>
   )
 }

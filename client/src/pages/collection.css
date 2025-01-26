@@ -1,0 +1,128 @@
+/* collection.css */
+
+/* Root styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styles */
+.collection-container {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction:row;
+    gap:20px;
+}
+
+/* Filter section styles */
+.filter-container {
+    background-color: #fff;
+    padding: 20px;
+    width:250px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container p {
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.filter-category, .filter-price {
+    margin-bottom: 15px;
+}
+
+.filter-category p, .filter-price p {
+    margin: 0 0 5px;
+}
+
+.filter-category div, .filter-price select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+/* Product listing styles */
+.product-list-container {
+    background-color: #fff;
+    padding: 20px;
+}
+
+.product-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.product-item {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-item p {
+    margin: 0;
+}
+
+.product-item .product-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.product-item .product-price {
+    color: #888;
+}
+/* Pagination styles */
+.pagination-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 0;
+  }
+  
+  .pagination li {
+    display: inline;
+  }
+  
+  .pagination button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .pagination button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .pagination .active button {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  
+  .pagination button:disabled {
+    background-color: #f9f9f9;
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  

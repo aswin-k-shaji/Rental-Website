@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import './Navbar.css';
+import { ShopeContext } from '../context/ShopeContext';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const { setShowSearch } = useContext(ShopeContext);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -35,7 +38,7 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/product" activeClassName="active-link">
+          <NavLink to="/collection" activeClassName="active-link">
             Items
           </NavLink>
         </li>
@@ -55,6 +58,7 @@ const Navbar = () => {
       <div className="navbar-icons">
         <img 
           src={assets.search} 
+          onClick={()=>setShowSearch(true)}
           alt="Search" 
           className="navbar-icon" 
         />

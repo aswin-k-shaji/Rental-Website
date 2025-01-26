@@ -10,7 +10,7 @@ const ProductItem = ({ id, image, title, pricePerDay }) => {
     <Link to={`/product/${id}`} className="card-link">
       <div className="card">
         <div>
-          <img src={image[0]} alt={title} />
+          <img src={image[0]} alt={title}/>
         </div>
         <p>{title}</p>
         <p>{currency}{pricePerDay}</p>
