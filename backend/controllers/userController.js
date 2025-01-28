@@ -33,7 +33,7 @@ const loginUser = async (req, res) => {
 // Route for user registration
 const registerUser = async (req, res) => {
     try {
-        const { name, email, password, userType, phoneNumber, address } = req.body;
+        const { name, email, password, phoneNumber, address } = req.body;
         
         // Checking if user already exists
         const exists = await userModel.findOne({ email });
@@ -56,7 +56,6 @@ const registerUser = async (req, res) => {
         const newUser = new userModel({
             name,
             email,
-            userType,
             password: hashedPassword,
             phoneNumber,
             address

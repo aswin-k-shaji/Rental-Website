@@ -1,45 +1,41 @@
 .card-link {
     text-decoration: none;
     color: inherit;
+    font: optional;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
   .card {
     margin: 16px;
     text-align: center;
-    /* transition: box-shadow 0.3s, transform 0.3s; */
     background-color: #fff;
     width: 60px;
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
   }
   
   .card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-5px);
   }
-  
   .card img {
     max-width: 100%;
     margin-bottom: 12px;
     height: 200px;
     object-fit: cover;
   }
-  
+
   .card p {
     margin: 8px 0;
     color: #333;
   }
   
   .card p:first-of-type {
-    font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1 rem;
   }
   
   .card p:last-of-type {
-    color: #007BFF;
-    font-size: 1.1em;
+    color: #000000;
+    font-size: 1 em;
   }
   
   @media (min-width: 600px) {

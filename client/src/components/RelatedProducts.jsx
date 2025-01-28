@@ -16,7 +16,6 @@ const RelatedProducts = ({ category }) => {
     
       productsCopy = productsCopy.filter((item) => category === item.category);
 
-      console.log(productsCopy.slice(0, 5));
       setRelated(productsCopy.slice(0, 5));
     }
   }, [products, category]);
@@ -29,13 +28,7 @@ const RelatedProducts = ({ category }) => {
         </div>
         <div className='gridcolumn'>
           {related.map((item, index) => (
-            <ProductItem
-              key={index}
-              title={item.title}
-              id={item._id}
-              pricePerDay={item.pricePerDay}
-              image={item.image}
-            />
+            <ProductItem key={index} id={item._id} image={item.image} title={item.title} pricePerDay={item.pricePerDay} />
           ))}
         </div>
       </div>

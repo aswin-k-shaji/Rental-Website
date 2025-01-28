@@ -7,78 +7,77 @@ import RelatedProducts from '../components/RelatedProducts';
 
 const Product = () => {
   const { productId } = useParams();
-
-  const { products, currency} = useContext(ShopeContext);
+  const { products, currency, addToCart } = useContext(ShopeContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchProductData();
+  }, [productId, products]);
 
   const fetchProductData = () => {
     products.forEach((item) => {
       if (item._id === productId) {
         setProductData(item);
-        console.log(item);
         setImage(item.image[0]);
       }
     });
   };
 
-  useEffect(() => {
-    fetchProductData();
-  }, [productId, products]);
+  const handleBookNow = () => {
+    navigate(`/place-order/${productId}`);
+  };
 
   return productData ? (
-    <div>
-      {/* product data */}
-      <div className="product-images">
-        {/* product images */}
-        <div>
-          <div>
-            {productData.image.map((item, index) => (
-              <img onClick={()=>setImage(item)} src={item} key={index} alt={`Product Image ${index + 1}`} />
-            ))}
+    <div className="product-page">
+      <div className="product-container">
+        {/* product data */}
+        <div className="product-images-section">
+          {/* product images */}
+          <div className="main-image">
+            <img src={image} alt="Main Product" />
           </div>
-          <div>
-            <img src={image} alt="" />
+          <div className="thumbnail-images">
+            {productData.image.map((item, index) => (
+              <img onClick={() => setImage(item)} src={item} key={index} alt={`Product Image ${index + 1}`} />
+            ))}
           </div>
         </div>
         {/* product info */}
-        <div>
-           <h1>{productData.title}</h1>
-           <div>
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_dull_icon} alt="" />
-            <p>(122)</p>
-           </div>
-        </div>
-        <p>{currency}{productData.pricePerDay}</p>
-        <p>{productData.description}</p>
-        <p>{productData.contact}</p>
-        <p>{productData.category}</p>
-        <p>{productData.owner}</p>
-        <div>
-          <p>{productData.location}</p>
-        </div>
-        <div>
-          <button>Add to favorite</button>
-          <hr/>
+        <div className="product-details">
+          <h1 className="product-title">{productData.title}</h1>
+          <div className="product-rating">
+            <img src={assets.star_icon} alt="Star" />
+            <img src={assets.star_icon} alt="Star" />
+            <img src={assets.star_icon} alt="Star" />
+            <img src={assets.star_icon} alt="Star" />
+            <img src={assets.star_dull_icon} alt="Star" />
+            <span>(122 reviews)</span>
+          </div>
+          <div className="product-price">{currency}{productData.pricePerDay}</div>
+          <p className="product-description">{productData.description}</p>
+          <p className="product-contact">Contact: {productData.contact}</p>
+          <p className="product-category">Category: {productData.category}</p>
+          <p className="product-owner">Owner: {productData.owner}</p>
+          <p className="product-location">Location: {productData.location}</p>
+          <button onClick={() => addToCart(productData._id)} className="add-to-favorite">Add to favorite</button>
+          <button onClick={handleBookNow} className="add-to-favorite">Book Now</button>
         </div>
       </div>
-      {/* Descriptiom & Review Section */}
-      <div>
-        <div>
-          <b className='' >Description</b>
-          <p>Reviews(300)</p>
+      {/* Description & Review Section */}
+      <div className="description-review">
+        <div className="description-review-header">
+          <b className="description-title">Description</b>
+          <span className="review-count">Reviews (300)</span>
         </div>
-        <div>
-          <p></p>
+        <div className="review-content">
+          <p>Customer reviews will be displayed here.</p>
         </div>
       </div>
-
       {/* Display Related Products */}
-            <RelatedProducts category={productData.category} />
+      <RelatedProducts category={productData.category} />
     </div>
   ) : (
     <div>Loading...</div>

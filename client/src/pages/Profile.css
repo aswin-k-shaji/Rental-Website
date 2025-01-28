@@ -1,0 +1,40 @@
+.profile-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f7f9fc;
+  }
+  
+  .profile-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    border-radius: 8px;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background: #2c3e50;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    color: white;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar a.active,
+  .sidebar a:hover {
+    background-color: #1abc9c;
+    color: white;
+    font-weight: bold;
+  }
+  

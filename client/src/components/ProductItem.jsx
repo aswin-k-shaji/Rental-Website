@@ -3,7 +3,7 @@ import { ShopeContext } from '../context/ShopeContext';
 import { Link } from 'react-router-dom';
 import './ProductItem.css';
 
-const ProductItem = ({ id, image, title, pricePerDay }) => {
+const ProductItem = ({id, image, title, pricePerDay }) => {
   const { currency } = useContext(ShopeContext);
 
   return (

@@ -4,58 +4,64 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-section">
-          <h3>Helpful Links</h3>
+      <div className="footer-container">
+        <div className="footer-column">
+          <h4>Customer Service</h4>
           <ul>
-            <li><a href="/">Home</a></li>
             <li><a href="/contact">Contact Us</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/privacy-policy">Privacy Policy</a></li>
-            <li><a href="/terms-of-use">Terms of Use</a></li>
-            <li><a href="/about-us">About Us</a></li>
+            <li><a href="/shipping">Shipping</a></li>
+            <li><a href="/returns">Returns</a></li>
+            <li><a href="/faq">FAQ</a></li>
           </ul>
         </div>
-        <div className="footer-section">
-          <h3>Get in touch</h3>
-          <p>3, 10/47/2, Indus Motor Company Pvt LTD M.G. Road, Thevara, Ernakulam, Kerala, 682015</p>
-          <p>support@indusgo.in</p>
-          <p>+1800 4122 4791</p>
+        <div className="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/careers">Careers</a></li>
+            <li><a href="/press">Press</a></li>
+            <li><a href="/blog">Blog</a></li>
+          </ul>
         </div>
-        <div className="footer-section">
-          <h3>Follow us on</h3>
+        <div className="footer-column">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="/new-arrivals">New Arrivals</a></li>
+            <li><a href="/sale">Sale</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/collections">Collections</a></li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h4>Connect With Us</h4>
           <div className="social-links">
-            <a href="https://www.facebook.com/IndusGo" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com/IndusGo" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com/indusgo/" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.linkedin.com/company/indus-go" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://www.youtube.com/channel/UCwt-8VqjmO-gy-OzRx9RQwA" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-youtube"></i>
-            </a>
+            <a href="#" className="social-icon">Facebook</a>
+            <a href="#" className="social-icon">Instagram</a>
+            <a href="#" className="social-icon">Twitter</a>
+            <a href="#" className="social-icon">Pinterest</a>
           </div>
-        </div>
-        <div className="footer-section">
-          <h3>Download App</h3>
-          <div className="app-links">
-            <a href="https://play.google.com/store/apps/details?id=com.indusgo" target="_blank" rel="noopener noreferrer">
-              <img src="/google-play-badge.png" alt="Google Play Badge" />
-            </a>
-            <a href="https://apps.apple.com/in/app/indus-go/id1532715417" target="_blank" rel="noopener noreferrer">
-              <img src="/app-store-badge.png" alt="App Store Badge" />
-            </a>
+          <div className="newsletter">
+            <h5>Subscribe to Our Newsletter</h5>
+            <form className="newsletter-form">
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                required 
+              />
+              <button type="submit">Subscribe</button>
+            </form>
           </div>
         </div>
       </div>
-      <div className="copyright">
-        &copy; 2025 Indus Go. All rights reserved.
+      <div className="footer-bottom">
+        <div className="footer-legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+          <a href="/accessibility">Accessibility</a>
+        </div>
+        <div className="footer-copyright">
+          © 2025 E-Commerce Store. All Rights Reserved.
+        </div>
       </div>
     </footer>
   );

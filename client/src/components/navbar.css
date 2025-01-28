@@ -135,3 +135,30 @@
         gap: 0.8rem;
     }
 }
+.cart-container1 {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .cart-image {
+    width: 25px;
+    margin-top:7px;
+
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top:8px;
+    transform: translate(50%, -50%);
+    background-color: #FF9800;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.6rem;
+    border: 2px solid white;
+    font-size: 0.8rem;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  

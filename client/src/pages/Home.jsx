@@ -1,6 +1,5 @@
 import React from 'react'
 import Hero from '../components/hero'
-import Content from '../components/Content'
 import './home.css'
 import LatestCollection from '../components/LatestCollection'
 
@@ -13,7 +12,6 @@ const Home = () => {
         </div>
         <LatestCollection/>
         <div>
-            <Content/>
         </div>
     </div>
   )

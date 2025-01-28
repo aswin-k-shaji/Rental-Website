@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './hero.css';
+import './Hero.css';
+import { useNavigate } from "react-router-dom";
+
 
 const Hero = () => {
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/collection');
+  };
+
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+
+
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/product/list'); // Updated API endpoint
+        const res = await axios.get('http://localhost:4000/api/product/list');
         if (res.data.success) {
           const items = res.data.items;
-          // Assuming we want to pick the first item's image as the featured image
-          const featuredImage = items.length > 0 ? items[0].image[0] : null; // Modify logic as needed
+          const featuredImage = items.length > 0 ? items[0].image[0] : null;
           setImage(featuredImage);
         } else {
           setError(res.data.message);
@@ -28,39 +38,33 @@ const Hero = () => {
     fetchImage();
   }, []);
 
-  if (loading) return <div className="loading">Loading...</div>;
-  if (error) return <div className="error">{error}</div>;
+  if (loading) return <div className="hero-loading">Loading...</div>;
+  if (error) return <div className="hero-error">{error}</div>;
 
   return (
-    <section className="hero-container">
-      <div className="hero-content">
-        <div className="hero-header">
-          <div className="hero-tag">
-            <p className="offer"></p>
-          </div>
-          <h1 className="hero-title">
-           Rental Items
-          </h1>
-        </div>
-        <div className="hero-cta">
-          <p className="cta-title">Rent items now</p>
-          <p className="cta-description">
-            Discover our wide selection of rental items for your every need.
-            Quality guaranteed
+    <div className="hero-section">
+      <div className="hero-wrapper">
+        <div className="hero-content">
+          <div className="hero-subtitle">Discover Unlimited Possibilities</div>
+          <h1 className="hero-title">Rent Everything You Need</h1>
+          <p className="hero-description">
+            From tools to tech, we've got you covered. Quality rentals at your fingertips.
           </p>
-          <button className="cta-button">Browse Collection</button>
+          <div className="hero-cta-container">
+            <button onClick={handleButtonClick} className="hero-primary-btn">Explore Rentals</button>
+            <button className="hero-secondary-btn">How It Works</button>
+          </div>
+        </div>
+        <div className="hero-image-container">
+          <img 
+            src={image || "/api/placeholder/600/600"} 
+            alt="Featured rental items" 
+            className="hero-image"
+          />
+          <div className="hero-image-overlay"></div>
         </div>
       </div>
-
-      {/* Hero right side */}
-      <div className="hero-image">
-        <img 
-          src={image || "/api/placeholder/600/600"} 
-          alt="Featured rental items" 
-          className="main-image"
-        />
-      </div>
-    </section>
+    </div>
   );
 };
 

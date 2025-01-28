@@ -5,12 +5,21 @@ import ProductItem from './ProductItem';
 import './LatestCollection.css';
 
 const LatestCollection = () => {
-  const { products } = useContext(ShopeContext);  
-  const [latestProducts, setLatestProducts] = useState([]);  
+  const { products} = useContext(ShopeContext);
+  const [latestProducts, setLatestProducts] = useState([]);
+
+  // useEffect(() => {
+  //   if (Array.isArray(products) && products.length > 0) {
+  //     setLatestProducts(products.slice(0,2));
+  //   }
+  // }, [products]);
 
   useEffect(() => {
-    setLatestProducts(products.slice(0, 10));
+    setLatestProducts(products);
   }, [products]);
+  
+
+  console.log(latestProducts);
 
   return (
     <div className="latest-collection">
@@ -20,6 +29,7 @@ const LatestCollection = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic dolore obcaecati voluptate doloremque tempore at expedita explicabo repellat debitis animi possimus, quia quae optio cum, numquam esse sequi sapiente?
         </p>
       </div>
+      
 
       <div className="product-list">
         {latestProducts.map((item, index) => (
@@ -28,6 +38,6 @@ const LatestCollection = () => {
       </div>
     </div>
   );
-}
+};
 
 export default LatestCollection;
