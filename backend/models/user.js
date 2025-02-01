@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: String },
   address: { type: String },
   orderIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "order" }],
+  createdProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: "item" }]
 }, { minimize: false });
 
 const userModel = mongoose.models.user || mongoose.model('user', userSchema);

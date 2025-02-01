@@ -16,4 +16,18 @@
     font-weight: bold;
     color: #007bff;
   }
-  
+  /* Sidebar.css */
+.sidebar {
+  width: 200px;
+  /* Your existing styles */
+}
+
+.nav-item .sub-options {
+  padding-left: 20px; /* Indent the sub-options */
+}
+
+.nav-item .sub-options .nav-link {
+  display: block;
+  padding: 5px 0;
+  /* Additional styles if needed */
+}

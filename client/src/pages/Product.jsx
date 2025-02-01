@@ -1,14 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ShopeContext } from '../context/ShopeContext';
-import { useParams, useNavigate } from 'react-router-dom';
-import './Product.css';
-import { assets } from '../assets/assets';
-import RelatedProducts from '../components/RelatedProducts';
+import React, { useContext, useEffect, useState } from "react";
+import { ShopeContext } from "../context/ShopeContext";
+import { useParams, useNavigate } from "react-router-dom";
+import "./Product.css";
+import { assets } from "../assets/assets";
+import RelatedProducts from "../components/RelatedProducts";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency, addToCart } = useContext(ShopeContext);
-  const [productData, setProductData] = useState(false);
+  const { products, currency } = useContext(ShopeContext);
+  const [productData, setProductData] = useState(null);
   const [image, setImage] = useState();
   const navigate = useNavigate();
 
@@ -18,35 +20,43 @@ const Product = () => {
   }, [productId, products]);
 
   const fetchProductData = () => {
-    products.forEach((item) => {
-      if (item._id === productId) {
-        setProductData(item);
-        setImage(item.image[0]);
-      }
-    });
-  };
-  
-  const handleAddToFavorite = () => {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      addToCart(productData._id);
-    } else {
-      alert("You need to log in to add this item to favorites.");
-      navigate('/login');
+    const product = products.find((item) => item._id === productId);
+    if (product) {
+      setProductData(product);
+      setImage(product.image[0]);
     }
   };
-  
+
+  const handleAddToCart = async () => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("You need to log in to add items to the cart.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:4000/api/user/add-to-cart", {
+        userId,
+        productId,
+      });
+      toast.success(response.data.message || 'Registration successful!');
+      
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      alert("Failed to add product to cart.");
+    }
+  };
 
   const handleBookNow = () => {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem("userId");
     if (userId) {
       navigate(`/place-order/${productId}`);
     } else {
       alert("You need to log in to book this item.");
-      navigate('/login');
+      navigate("/login");
     }
   };
-  
 
   return productData ? (
     <div className="product-page">
@@ -75,12 +85,16 @@ const Product = () => {
           <p className="product-description">{productData.description}</p>
           <p className="product-contact">Contact: {productData.contact}</p>
           <p className="product-category">Category: {productData.category}</p>
-          <p className="product-owner">Owner: {productData.owner}</p>
+          <p className="product-owner">
+            Owner: {typeof productData.owner === 'object' ? `${productData.owner.name} (${productData.owner.email})` : productData.owner}
+          </p>
           <p className="product-location">Location: {productData.location}</p>
-          <button onClick={handleAddToFavorite} className="add-to-favorite">
-            Add to Favorite
+          <button onClick={handleAddToCart} className="add-to-favorite">
+            Save
           </button>
-          <button onClick={handleBookNow} className="add-to-favorite">Book Now</button>
+          <button onClick={handleBookNow} className="add-to-favorite">
+            Book Now
+          </button>
         </div>
       </div>
       {/* Description & Review Section */}

@@ -3,7 +3,6 @@ import itemModel from '../models/items.js';
 
 // Add Product
 const addProduct = async (req, res) => {
-
     try {
         const { title, description, category, owner, pricePerDay, contact, location } = req.body;
         const image1 = req.files?.image1?.[0];
@@ -25,8 +24,8 @@ const addProduct = async (req, res) => {
             description,
             category,
             owner,
-            pricePerDay:Number(pricePerDay),
-            contact:Number(contact),
+            pricePerDay: Number(pricePerDay),
+            contact: Number(contact),
             location,
             image: imagesUrl,
             date: Date.now(),
@@ -41,6 +40,7 @@ const addProduct = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
 
 // List Products
 const listProduct = async (req, res) => {
