@@ -19,8 +19,7 @@ const Cart = () => {
         });
       }
     }
-    setCartData(tempData); // Update the state here
-    console.log(tempData);
+    setCartData(tempData);
   }, [cartItems]);
 
   return (
@@ -34,7 +33,12 @@ const Cart = () => {
             const productData = products.find((product) => product._id === item._id);
 
             return (
-              <div key={index} className="cart-item">
+              <div 
+                key={index} 
+                className="cart-item"
+                onClick={() => navigate(`/product/${item._id}`)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div>
                   <img className='imgg' src={productData.image[0]} alt="" />
                   <div className="cart-item-details">
@@ -44,9 +48,19 @@ const Cart = () => {
                     </div>
                   </div>
                 </div>
-                <div className="cart-item-input">
-                  <input onClick={(e)=>e.target.value === '' || e.target.value === '0'? null :updateQuantity(item._id,Number(e.target.value))} type="number" min={1} defaultValue={item.Quantity} />
-                  <img onClick={()=>updateQuantity(item._id,0)} src={assets.bin_icon} alt="Remove item" className="cart-item-remove" />
+                <div className="cart-item-input" onClick={(e) => e.stopPropagation()}>
+                  <input 
+                    onClick={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, Number(e.target.value))} 
+                    type="number" 
+                    min={1} 
+                    defaultValue={item.Quantity} 
+                  />
+                  <img 
+                    onClick={() => updateQuantity(item._id, 0)} 
+                    src={assets.bin_icon} 
+                    alt="Remove item" 
+                    className="cart-item-remove" 
+                  />
                 </div>
               </div>
             );
@@ -55,9 +69,6 @@ const Cart = () => {
       </div>  
       <div className="cart-total">
         <CartTotal />
-      </div>
-      <div>
-        <button onClick={()=>navigate('/place-order')} >Rent Items</button>
       </div>
     </div>
   );

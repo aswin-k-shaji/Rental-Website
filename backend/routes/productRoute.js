@@ -24,7 +24,7 @@ productRouter.post(
 productRouter.post('/remove', adminAuth, removeProduct);
 productRouter.post('/single', singleProduct);
 productRouter.get('/list', listProduct);
-productRouter.put(
+productRouter.patch(
     '/update',
     upload.fields([
         { name: 'image1', maxCount: 1 },

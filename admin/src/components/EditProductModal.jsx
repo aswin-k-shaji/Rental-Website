@@ -126,7 +126,7 @@ const EditProductModal = ({ product, onClose }) => {
                 console.log('FormData entry:', pair[0], pair[1]);
             }
 
-            const response = await axios.put(
+            const response = await axios.patch(
                 `${backendUrl}/api/product/update`,
                 formData,
                 {

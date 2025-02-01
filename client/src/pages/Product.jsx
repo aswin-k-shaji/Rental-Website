@@ -25,17 +25,33 @@ const Product = () => {
       }
     });
   };
+  
+  const handleAddToFavorite = () => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      addToCart(productData._id);
+    } else {
+      alert("You need to log in to add this item to favorites.");
+      navigate('/login');
+    }
+  };
+  
 
   const handleBookNow = () => {
-    navigate(`/place-order/${productId}`);
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      navigate(`/place-order/${productId}`);
+    } else {
+      alert("You need to log in to book this item.");
+      navigate('/login');
+    }
   };
+  
 
   return productData ? (
     <div className="product-page">
       <div className="product-container">
-        {/* product data */}
         <div className="product-images-section">
-          {/* product images */}
           <div className="main-image">
             <img src={image} alt="Main Product" />
           </div>
@@ -45,7 +61,6 @@ const Product = () => {
             ))}
           </div>
         </div>
-        {/* product info */}
         <div className="product-details">
           <h1 className="product-title">{productData.title}</h1>
           <div className="product-rating">
@@ -62,7 +77,9 @@ const Product = () => {
           <p className="product-category">Category: {productData.category}</p>
           <p className="product-owner">Owner: {productData.owner}</p>
           <p className="product-location">Location: {productData.location}</p>
-          <button onClick={() => addToCart(productData._id)} className="add-to-favorite">Add to favorite</button>
+          <button onClick={handleAddToFavorite} className="add-to-favorite">
+            Add to Favorite
+          </button>
           <button onClick={handleBookNow} className="add-to-favorite">Book Now</button>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
@@ -44,11 +44,15 @@ const RentalLogin = () => {
         const response = await axios.post(`${backendUrl}/api/user/login`, formData);
 
         if (response.data.success) {
-          localStorage.setItem('userId', response.data.userId); // Save user ID in local storage
+          localStorage.setItem('userId', response.data.userId);
+
+          const userId = localStorage.getItem('userId');
+          console.log(userId);
+
           console.log('User logged in successfully');
-          navigate('/'); // Navigate to home page
+          navigate('/'); 
         } else {
-          setErrors({ submit: response.data.message }); // Show backend error
+          setErrors({ submit: response.data.message });
         }
       } catch (error) {
         console.error('Error logging in:', error);
@@ -103,7 +107,7 @@ const RentalLogin = () => {
             </label>
             <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
           </div>
-
+          
           {errors.submit && <div className="submit-error">{errors.submit}</div>}
 
           <button type="submit" className="login-button" disabled={isLoading}>

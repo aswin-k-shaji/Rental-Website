@@ -1,12 +1,13 @@
 import React from "react";
 import "./Navbar.css";
+import { Link } from 'react-router-dom';
 
 const Navbar = ({setToken}) => {
   return (
    <>
     <nav className="navbar">
-      <div style={{marginLeft:'40px'}} className="navbar-logo">Rental</div>
-      <button onClick={()=>setToken('')} className="logout-button">Logout</button>
+      <Link to="/" className="navbar-logo" style={{ marginLeft: '40px', cursor: 'pointer' }}>Rental</Link>
+      <button onClick={() => setToken('')} className="logout-button">Logout</button>
     </nav>
    </>
   );
