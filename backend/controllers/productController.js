@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
 import itemModel from '../models/items.js';
+import { userModel } from './userController.js';
 
 // Add Product
 const addProduct = async (req, res) => {
@@ -33,6 +34,14 @@ const addProduct = async (req, res) => {
 
         const item = new itemModel(productData);
         await item.save();
+
+        // Add the item to the user's createdProducts
+        const user = await userModel.findById(owner);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+        user.createdProducts.push(item._id);
+        await user.save();
 
         res.json({ success: true, message: 'Item added', item });
     } catch (error) {

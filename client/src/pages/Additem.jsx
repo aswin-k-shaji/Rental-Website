@@ -5,7 +5,7 @@ import axios from 'axios';
 import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
 
-const Additem = ({token}) => {
+const Additem = () => {
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -45,7 +45,7 @@ const Additem = ({token}) => {
       formData.append("contact", contact);
       formData.append("location", location);
       formData.append("NumberOfItems", numberOfItems);
-      formData.append("owner", userId); // Add owner ID
+      formData.append("owner", userId);
 
       image1 && formData.append("image1", image1);
       image2 && formData.append("image2", image2);
@@ -54,7 +54,7 @@ const Additem = ({token}) => {
 
       console.log("Submitting form...");
 
-      const res = await axios.post(backendUrl + "/api/product/add", formData, { headers: { token } });
+      const res = await axios.post(backendUrl + "/api/product/add", formData);
 
       if (res.data.success) {
         toast.success(res.data.message);
@@ -65,7 +65,7 @@ const Additem = ({token}) => {
         setContact("");
         setLocation("");
         setPrice("");
-        setNumberOfItems("");
+        setNumberOfItems(1);
         setImage1(false);
         setImage2(false);
         setImage3(false);
@@ -79,8 +79,7 @@ const Additem = ({token}) => {
     } finally {
       setLoading(false);
     }
-};
-
+  };
 
   return (
     <form onSubmit={onSubmitHandler} className="add-form">
