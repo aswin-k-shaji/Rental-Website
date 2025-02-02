@@ -289,5 +289,22 @@ const removeFromCart = async (req, res) => {
 
 
 
+const getUserItems = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.params.userId).populate("createdProducts");
+        
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
 
-export { loginUser, registerUser, adminLogin, getAllUsers, removeUser, userModel, getUserById, addToCart,getCartItems,removeFromCart};
+        res.json({ success: true, items: user.createdProducts });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
+
+
+
+export { loginUser, registerUser, adminLogin, getAllUsers, removeUser, userModel, getUserById, addToCart,getCartItems,removeFromCart,getUserItems};

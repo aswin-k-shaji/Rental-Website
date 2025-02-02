@@ -7,6 +7,8 @@ import Orders from '../components/Orders';
 import Request from '../components/Request';
 import './Profile.css';
 import Cart from '../components/Cart';
+import Additem from './Additem';
+import View from './View';
 
 const Profile = () => {
   return (
@@ -19,6 +21,8 @@ const Profile = () => {
           <Route path="orders" element={<Orders />} />
           <Route path="request" element={<Request />} />
           <Route path="cart" element={<Cart/>}/>
+          <Route path="items/add" element={<Additem/>}/>
+          <Route path="items/view" element={<View/>} />
         </Routes>
       </div>
     </div>

@@ -17,6 +17,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import Signup from './pages/Signup.jsx'
 import Profile from './pages/Profile'
 
+export const backendUrl = import.meta.env.VITE_BACKEND_URL
+
 const App = () => {
   return (
     <div>

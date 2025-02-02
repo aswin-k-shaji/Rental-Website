@@ -22,9 +22,9 @@ const Sidebar = () => {
         </NavLink>
         {activeItem === 'items' && (
           <div className="sub-options">
-            <NavLink to="/profile/view" activeClassName="active">View Items</NavLink>
+            <NavLink to="/profile/items/view" activeClassName="active">View Items</NavLink>
             <NavLink to="/profile/items/add" activeClassName="active">Add Items</NavLink>
-          </div>
+          </div>  
         )}
       </div>
       <NavLink to="/profile/orders" activeClassName="active" onClick={() => handleItemClick(null)}>Orders</NavLink>

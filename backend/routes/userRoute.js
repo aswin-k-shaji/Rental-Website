@@ -1,5 +1,5 @@
 import express from 'express';
-import {loginUser,registerUser,adminLogin, getAllUsers, removeUser, addToCart, getUserById, getCartItems,removeFromCart} from '../controllers/userController.js'
+import {loginUser,registerUser,adminLogin, getAllUsers, removeUser, addToCart, getUserById, getCartItems,removeFromCart, getUserItems} from '../controllers/userController.js'
 
 const userRouter = express.Router();
 
@@ -13,6 +13,8 @@ userRouter.post('/add-to-cart', addToCart);
 // userRouter.post("/cart", getCartData);
 userRouter.get('/:userId/cart', getCartItems);
 userRouter.delete('/cart/:userId/:productId', removeFromCart);
+userRouter.get("/:userId/items", getUserItems);
+
 
 
 

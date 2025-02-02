@@ -5,7 +5,7 @@ import axios from 'axios';
 import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
 
-const Add = ({ token }) => {
+const Additem = ({token}) => {
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -17,6 +17,7 @@ const Add = ({ token }) => {
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
   const [contact, setContact] = useState('');
+  const [numberOfItems, setNumberOfItems] = useState(1);
 
   const [loading, setLoading] = useState(false);
 
@@ -29,31 +30,42 @@ const Add = ({ token }) => {
     try {
       const formData = new FormData();
 
-      formData.append('title', title);
-      formData.append('description', description);
-      formData.append('pricePerDay', price);
-      formData.append('category', category);
-      formData.append('contact', contact);
-      formData.append('location', location);
+      // Retrieve user ID from local storage
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        toast.error("User not logged in!");
+        setLoading(false);
+        return;
+      }
 
-      image1 && formData.append('image1', image1);
-      image2 && formData.append('image2', image2);
-      image3 && formData.append('image3', image3);
-      image4 && formData.append('image4', image4);
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("pricePerDay", price);
+      formData.append("category", category);
+      formData.append("contact", contact);
+      formData.append("location", location);
+      formData.append("NumberOfItems", numberOfItems);
+      formData.append("owner", userId); // Add owner ID
 
-      console.log('Submitting form...');
+      image1 && formData.append("image1", image1);
+      image2 && formData.append("image2", image2);
+      image3 && formData.append("image3", image3);
+      image4 && formData.append("image4", image4);
 
-      const res = await axios.post(backendUrl + '/api/product/add', formData, { headers: { token } });
+      console.log("Submitting form...");
+
+      const res = await axios.post(backendUrl + "/api/product/add", formData, { headers: { token } });
 
       if (res.data.success) {
         toast.success(res.data.message);
-        // Clear the form fields
-        setTitle('');
-        setDescription('');
-        setCategory('');
-        setContact('');
-        setLocation('');
-        setPrice('');
+        // Clear form fields
+        setTitle("");
+        setDescription("");
+        setCategory("");
+        setContact("");
+        setLocation("");
+        setPrice("");
+        setNumberOfItems("");
         setImage1(false);
         setImage2(false);
         setImage3(false);
@@ -67,7 +79,8 @@ const Add = ({ token }) => {
     } finally {
       setLoading(false);
     }
-  };
+};
+
 
   return (
     <form onSubmit={onSubmitHandler} className="add-form">
@@ -130,6 +143,20 @@ const Add = ({ token }) => {
         />
       </div>
 
+      <div>
+        <p className="add-label">Quantity</p>
+        <input
+          onChange={(e) => setNumberOfItems(e.target.value)}
+          value={numberOfItems}
+          type="number"
+          min="1"
+          placeholder="Number of Items"
+          className="add-input"
+          required
+          disabled={loading}
+        />
+      </div>
+
       <div className="add-row">
         <div>
           <p className="add-label">Category</p>
@@ -181,4 +208,4 @@ const Add = ({ token }) => {
   );
 };
 
-export default Add;
+export default Additem;
