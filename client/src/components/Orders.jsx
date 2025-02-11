@@ -1,75 +1,89 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import './Orders.css'
-import Title from "./Title"; 
+import { useNavigate } from "react-router-dom";
+import "./Orders.css";
 
 const Orders = () => {
-  const [orders, setOrders] = useState([]); // State to store orders
-  const [loading, setLoading] = useState(true); // State to handle loading
-  const [error, setError] = useState(null); // State to handle errors
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      const userId = localStorage.getItem("userId"); // Get userId from localStorage
+    if (userId) {
+      fetchOrders();
+    }
+  }, [userId]);
 
-      if (!userId) {
-        setError("User ID not found. Please log in.");
-        setLoading(false);
-        return;
-      }
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.post("http://localhost:4000/api/Order/orders", { userId });
+      let ordersData = response.data.orders || [];
 
-      try {
-        // Fetch orders for the user
-        const response = await axios.get(`http://localhost:4000/api/order/user/${userId}`);
-        setOrders(response.data.orders); // Set the orders in state
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-        setError("Failed to fetch orders. Please try again later.");
-      } finally {
-        setLoading(false); // Stop loading
-      }
-    };
+      ordersData = ordersData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    fetchOrders();
-  }, []);
+      const ordersWithItems = await Promise.all(
+        ordersData.map(async (order) => {
+          try {
+            const itemResponse = await axios.post("http://localhost:4000/api/product/single", {
+              itemId: order.itemId,
+            });
+            return { ...order, item: itemResponse.data.item || null };
+          } catch (err) {
+            console.error("Error fetching item details for order:", order._id, err);
+            return { ...order, item: null };
+          }
+        })
+      );
 
-  if (loading) {
-    return <div>Loading orders...</div>; // Show loading message
-  }
+      setOrders(ordersWithItems);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setError("Error fetching orders. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>; // Show error message
-  }
+  const handleItemClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
 
   return (
-<div className="orders-page">
-  <Title text1={"Your"} text2={"Orders"} />
-  {orders.length === 0 ? (
-    <p className="no-orders">No orders found.</p>
-  ) : (
-    <div className="orders-list">
-      {orders.map((order) => (
-        <div key={order._id} className="order-card">
-          <h2 className="order-id">{order.itemId.title}</h2>
-          <img
-                  className="item-image"
-                  src={order.itemId.image[0]}
-                  alt={order.itemId.title}
-                />
-          <div className="order-info">
-            <p className="order-status">Status: {order.orderStatus}</p>
-            <p className="order-amount">Total Amount: ${order.totalAmount}</p>
-            <p className="order-payment">Payment Method: {order.paymentMethod}</p>
-            <p className="order-date">Order Date: {new Date(order.createdAt).toLocaleDateString()}</p>
-          </div>
-          
+    <div className="orders-container">
+      <h1>Your Orders</h1>
 
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p className="error">{error}</p>
+      ) : orders.length === 0 ? (
+        <p>No orders found.</p>
+      ) : (
+        <div className="orders-list">
+          {orders.map((order) => (
+            <div key={order._id} className="order-item" onClick={() => handleItemClick(order.item._id)}>
+              {order.item ? (
+                <>
+                  <img src={order.item.image[0]} alt={order.item.title} className="order-image" />
+                  <div className="order-details">
+                    <h2>{order.item.title}</h2>
+                    <p><strong>Price per Day:</strong> ${order.item.pricePerDay}</p>
+                    <p><strong>Start Date:</strong> {new Date(order.startDate).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+                    <p><strong>Return Date:</strong> {new Date(order.returnDate).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
 
+                    <p><strong>Total Amount:</strong> ${order.totalAmount}</p>
+                  </div>
+                </>
+              ) : (
+                <p className="error">Item details not available</p>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
-  )}
-</div>
   );
 };
 

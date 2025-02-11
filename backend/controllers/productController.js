@@ -5,7 +5,7 @@ import { userModel } from './userController.js';
 // Add Product
 const addProduct = async (req, res) => {
     try {
-        const { title, description, category, owner, pricePerDay, contact, location } = req.body;
+        const { title, description, category, owner,NumberOfItems, pricePerDay, contact, location } = req.body;
         const image1 = req.files?.image1?.[0];
         const image2 = req.files?.image2?.[0];
         const image3 = req.files?.image3?.[0];
@@ -25,6 +25,7 @@ const addProduct = async (req, res) => {
             description,
             category,
             owner,
+            NumberOfItems,
             pricePerDay: Number(pricePerDay),
             contact: Number(contact),
             location,

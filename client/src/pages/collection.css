@@ -1,25 +1,26 @@
-/* collection.css */
 
-/* Root styles */
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding: 0;
 }
-
-/* Container styles */
 .collection-container {
     margin: 0 auto;
     padding: 20px;
     display: flex;
+    width:100%;
     flex-direction:row;
-    gap:20px;
+    
+}
+.inputt{
+    width:auto;
+}
+.impu{
+    width:40px;
 }
 
-/* Filter section styles */
 .filter-container {
     background-color: #fff;
     padding: 20px;
-    width:250px;
+    width:auto;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

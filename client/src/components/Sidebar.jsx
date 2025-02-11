@@ -28,7 +28,7 @@ const Sidebar = () => {
         )}
       </div>
       <NavLink to="/profile/orders" activeClassName="active" onClick={() => handleItemClick(null)}>Orders</NavLink>
-      <NavLink to="/profile/cart" activeClassName="active" onClick={() => handleItemClick(null)}>Cart</NavLink>
+      <NavLink to="/profile/cart" activeClassName="active" onClick={() => handleItemClick(null)}>Saved</NavLink>
       <NavLink to="/profile/request" activeClassName="active" onClick={() => handleItemClick(null)}>Request</NavLink>
     </div>
   );

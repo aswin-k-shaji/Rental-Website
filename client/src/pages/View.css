@@ -1,1 +1,99 @@
+.view-container {
+    max-width: 1000px;
+    margin: 1rem auto;
+    padding: 0 15px;
+}
+
+.view-container h2 {
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.item-card {
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem;
+    transition: transform 0.2s ease;
+}
+
+.item-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.item-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+}
+
+.item-card h3 {
+    color: #333;
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.item-card p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0.3rem 0;
+    line-height: 1.3;
+}
+
+.buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.details-btn, .remove-btn {
+    flex: 1;
+    padding: 0.4rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.details-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.details-btn:hover {
+    background-color: #0056b3;
+}
+
+.remove-btn {
+    background-color: #ff4444;
+    color: white;
+}
+
+.remove-btn:hover {
+    background-color: #ff0000;
+}
+
+@media (max-width: 600px) {
+    .items-list {
+        grid-template-columns: 1fr;
+    }
     
+    .item-card {
+        margin-bottom: 0.8rem;
+    }
+}

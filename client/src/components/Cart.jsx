@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
+import Title from "./Title";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -23,7 +24,6 @@ const Cart = () => {
     }
   };
 
-  // Remove Item from Cart
   const removeItemFromCart = async (productId) => {
     try {
       await axios.delete(`http://localhost:4000/api/user/cart/${userId}/${productId}`);
@@ -34,8 +34,8 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-container">
-      <h2>Your Cart</h2>
+    <div className="cart-containerr">
+      <Title text1={"SAVED"} text2={"ITEMS"} />
       {cartItems.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
@@ -53,7 +53,7 @@ const Cart = () => {
                 {item.title}
               </h3>
               <p>{item.description}</p>
-              <p>Price per day: <strong>${item.pricePerDay}</strong></p>
+              <p>Price per day: <strong>Rs {item.pricePerDay}</strong></p>
               <button className="remove-btn" onClick={() => removeItemFromCart(item._id)}>Remove</button>
             </div>
           </div>

@@ -17,7 +17,7 @@ const Additem = () => {
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
   const [contact, setContact] = useState('');
-  const [numberOfItems, setNumberOfItems] = useState(1);
+  const [numberOfItems, setNumberOfItems] = useState('');
 
   const [loading, setLoading] = useState(false);
 
@@ -65,7 +65,7 @@ const Additem = () => {
         setContact("");
         setLocation("");
         setPrice("");
-        setNumberOfItems(1);
+        setNumberOfItems("");
         setImage1(false);
         setImage2(false);
         setImage3(false);
@@ -170,6 +170,7 @@ const Additem = () => {
             <option value="Electronics">Electronics</option>
             <option value="Machines">Machines</option>
             <option value="House">House/Rooms</option>
+            <option value="Accessories">Accessories</option>
           </select>
         </div>
 

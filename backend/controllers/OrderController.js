@@ -1,6 +1,8 @@
 import orderModel from "../models/order.js";
 import userModel from "../models/user.js";
 import itemModel from "../models/items.js";
+import mongoose from "mongoose";
+
 
 export const placeOrder = async (req, res) => {
   try {
@@ -12,10 +14,15 @@ export const placeOrder = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Validate the item ID
+    // Validate the item ID and fetch owner
     const item = await itemModel.findById(itemId);
     if (!item) {
       return res.status(404).json({ error: "Item not found" });
+    }
+
+    const ownerId = item.owner; // Get owner from the item
+    if (!ownerId) {
+      return res.status(404).json({ error: "Owner not found for this item" });
     }
 
     // Validate dates
@@ -39,6 +46,7 @@ export const placeOrder = async (req, res) => {
     const newOrder = new orderModel({
       userId,
       itemId,
+      ownerId, // Use fetched ownerId
       startDate,
       returnDate,
       totalAmount,
@@ -48,6 +56,10 @@ export const placeOrder = async (req, res) => {
 
     await newOrder.save();
 
+    // Update the user's orderIds field
+    user.orderIds.push(newOrder._id);
+    await user.save();
+
     res.status(201).json({ message: "Order placed successfully", order: newOrder });
   } catch (error) {
     console.error("Error placing order:", error);
@@ -55,25 +67,61 @@ export const placeOrder = async (req, res) => {
   }
 };
 
+
+
+
 export const getUserOrders = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req.body;
 
-    // Validate the user ID
-    const user = await userModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    console.log("🔍 Received userId:", userId);
+
+    // Validate userId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
     }
 
-    // Fetch the user's orders and populate related item data
-    const orders = await orderModel
-      .find({ userId })
-      .populate("itemId", "title pricePerDay image")
-      .populate("userId", "name email");
+    // Find the user by ID and populate order details
+    const user = await userModel.findById(userId).populate("orderIds");
 
-    res.status(200).json({ orders });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Extract order details
+    const userOrders = user.orderIds;
+
+    if (!userOrders || userOrders.length === 0) {
+      return res.status(200).json({ message: "No orders found", orders: [] });
+    }
+
+    console.log("📦 Retrieved Orders:", userOrders);
+
+    res.status(200).json({ orders: userOrders });
   } catch (error) {
-    console.error("Error fetching user orders:", error);
-    res.status(500).json({ error: "An error occurred while fetching user orders" });
+    console.error("❌ Error fetching user orders:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
+
+export const getOwnerOrders = async (req, res) => {
+  try {
+    const { ownerId } = req.query; // Get ownerId from query params
+
+    if (!ownerId) {
+      return res.status(400).json({ message: "Owner ID is required." });
+    }
+
+    const orders = await orderModel.find({ ownerId }).populate("userId itemId");
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching owner orders:", error);
+    res.status(500).json({ message: "Failed to fetch orders" });
+  }
+};
+
+
