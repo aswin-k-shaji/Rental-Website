@@ -6,7 +6,7 @@ const Navbar = ({setToken}) => {
   return (
    <>
     <nav className="navbar">
-      <Link to="/" className="navbar-logo" style={{ marginLeft: '40px', cursor: 'pointer' }}>Rental</Link>
+      <Link to="/" className="navbar-logo" style={{ marginLeft: '40px', cursor: 'pointer',textDecoration:'none' }}>Rental</Link>
       <button onClick={() => setToken('')} className="logout-button">Logout</button>
     </nav>
    </>

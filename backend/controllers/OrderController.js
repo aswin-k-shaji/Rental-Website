@@ -8,24 +8,21 @@ export const placeOrder = async (req, res) => {
   try {
     const { userId, itemId, startDate, returnDate, totalAmount, paymentMethod, deliveryInfo } = req.body;
 
-    // Validate the user ID
     const user = await userModel.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Validate the item ID and fetch owner
     const item = await itemModel.findById(itemId);
     if (!item) {
       return res.status(404).json({ error: "Item not found" });
     }
 
-    const ownerId = item.owner; // Get owner from the item
+    const ownerId = item.owner; 
     if (!ownerId) {
       return res.status(404).json({ error: "Owner not found for this item" });
     }
 
-    // Validate dates
     if (!startDate || !returnDate) {
       return res.status(400).json({ error: "Start date and return date are required" });
     }
@@ -35,18 +32,15 @@ export const placeOrder = async (req, res) => {
     if (end <= start) {
       return res.status(400).json({ error: "Return date must be after the start date" });
     }
-
-    // Validate totalAmount
     const calculatedAmount = Math.ceil((end - start) / (1000 * 60 * 60 * 24) + 1) * item.pricePerDay;
     if (calculatedAmount !== totalAmount) {
       return res.status(400).json({ error: "Total amount calculation mismatch" });
     }
 
-    // Create the order
     const newOrder = new orderModel({
       userId,
       itemId,
-      ownerId, // Use fetched ownerId
+      ownerId,
       startDate,
       returnDate,
       totalAmount,
@@ -56,7 +50,6 @@ export const placeOrder = async (req, res) => {
 
     await newOrder.save();
 
-    // Update the user's orderIds field
     user.orderIds.push(newOrder._id);
     await user.save();
 
@@ -121,6 +114,31 @@ export const getOwnerOrders = async (req, res) => {
   } catch (error) {
     console.error("Error fetching owner orders:", error);
     res.status(500).json({ message: "Failed to fetch orders" });
+  }
+};
+
+
+
+export const getAllOrders = async (req, res) => {
+  try {
+
+    console.log("inside");
+    
+    const orders = await orderModel.find({})
+      .populate('userId', 'name email') // Populate user details
+      .populate('itemId', 'title pricePerDay image') // Populate item details
+      .populate('ownerId', 'name email'); // Populate owner details if needed
+
+    res.status(200).json({
+      success: true,
+      orders,
+    });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch orders. Please try again later.",
+    });
   }
 };
 

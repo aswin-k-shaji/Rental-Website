@@ -26,8 +26,7 @@ const LatestCollection = () => {
       <div className="latest-collection-title">
         <Title text1={'LATEST'} text2={'COLLECTION'} />
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic dolore obcaecati voluptate doloremque tempore at expedita explicabo repellat debitis animi possimus, quia quae optio cum, numquam esse sequi sapiente?
-        </p>
+        The latest collection features a diverse range of rental properties, offering everything from modern apartments to cozy homes. With updated interiors, premium amenities, and competitive pricing, these new listings are perfect for those looking for comfort and convenience. Whether you need a short-term stay or a long-term lease, our latest selection has something for everyone. Don't miss out—browse now and find your ideal space!         </p>
       </div>
       
 

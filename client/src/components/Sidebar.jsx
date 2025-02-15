@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState(null);
+  const location = useLocation();
 
   const handleItemClick = (item) => {
     setActiveItem(activeItem === item ? null : item);
@@ -11,25 +12,53 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <NavLink to="/profile" activeClassName="active" onClick={() => handleItemClick(null)}>Home</NavLink>
+      <NavLink
+        to="/profile"
+        className={({ isActive }) => (isActive ? 'active' : '')}
+        onClick={() => handleItemClick(null)}
+      >
+        Home
+      </NavLink>
       <div className="nav-item">
         <NavLink
           to="/profile/items"
-          activeClassName="active"
+          className={({ isActive }) => (isActive ? 'active' : '')}
           onClick={() => handleItemClick('items')}
         >
           Items
         </NavLink>
         {activeItem === 'items' && (
           <div className="sub-options">
-            <NavLink to="/profile/items/view" activeClassName="active">View Items</NavLink>
-            <NavLink to="/profile/items/add" activeClassName="active">Add Items</NavLink>
-          </div>  
+            <NavLink
+              to="/profile/items/add"
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Add Items
+            </NavLink>
+          </div>
         )}
       </div>
-      <NavLink to="/profile/orders" activeClassName="active" onClick={() => handleItemClick(null)}>Orders</NavLink>
-      <NavLink to="/profile/cart" activeClassName="active" onClick={() => handleItemClick(null)}>Saved</NavLink>
-      <NavLink to="/profile/request" activeClassName="active" onClick={() => handleItemClick(null)}>Request</NavLink>
+      <NavLink
+        to="/profile/orders"
+        className={({ isActive }) => (isActive ? 'active' : '')}
+        onClick={() => handleItemClick(null)}
+      >
+        Orders
+      </NavLink>
+      <NavLink
+        to="/profile/cart"
+        className={({ isActive }) => (isActive ? 'active' : '')}
+        onClick={() => handleItemClick(null)}
+      >
+        Saved
+      </NavLink>
+      <NavLink
+        to="/profile/request"
+        className={({ isActive }) => (isActive ? 'active' : '')}
+        onClick={() => handleItemClick(null)}
+      >
+        Request
+      </NavLink>
     </div>
   );
 };

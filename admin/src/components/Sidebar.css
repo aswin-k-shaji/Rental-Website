@@ -1,89 +1,130 @@
-*{
-    margin:0;
-    padding:0;
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease;
 }
-img{
-    width:20px;
-    margin-right:10px;
-    height:100%;
-    background-color: transparent;
+
+.sidebar-content {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-.NavLink{
-    border-radius:5px;
-    display: flex;
-    flex-direction:row;
-    padding:10px;
-    margin-top:10px;
-    text-decoration: none;
-    font-weight: 600;
-    color:black;
-    width:100%;
+
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
 }
-p{
-    background-color: transparent;
-    font-size:14px;
-    font-weight:600;
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  color: #495057;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-weight: 500;
 }
-.main{
-    height:auto;
+
+.menu-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  opacity: 0.8;
 }
-.sidebar-container {
-    width: 17%;
-    padding-left: 40px;
+
+.menu-item span {
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.menu-item:hover {
+  background: #e9ecef;
+  color: #228be6;
+}
+
+.menu-item.active {
+  background: #e7f5ff;
+  color: #228be6;
+}
+
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  padding-left: 2.5rem;
+}
+
+.submenu.open {
+  max-height: 200px;
+}
+
+.submenu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  color: #495057;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.submenu-item span {
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
+.submenu-item:hover {
+  background: #e9ecef;
+  color: #228be6;
+}
+
+.submenu-item.active {
+  background: #e7f5ff;
+  color: #228be6;
+}
+
+/* Active state styles */
+.active {
+  background: #e7f5ff;
+  color: #228be6;
+}
+
+/* Make sure the NavLink active class is styled properly */
+.NavLink.active {
+  background: #e7f5ff;
+  color: #228be6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px;
   }
   
-  .sidebar-menu {
-    height: 500px;
+  .sidebar-content {
+    padding: 1.5rem 1rem;
   }
   
-  .NavLink {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 10px;
-    color: black;
-    font-size: 16px;
+  .menu-item {
+    padding: 0.7rem 0.8rem;
   }
   
-  .NavLink img {
-    width: 20px;
-    margin-right: 10px;
+  .submenu-item {
+    padding: 0.5rem 0.8rem;
   }
-    .dropdown {
-    margin-bottom: 10px;
-    position: relative;
-    width: 100%;
-  }
-  
-  .dropdown-header {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 10px;
-  }
-  
-  .dropdown-header:hover {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-  }
-  
-  .dropdown-content {
-    display: flex;
-    flex-direction: column;
-    background: white;
-    padding: 5px;
-    min-width: 100%;
-    margin-top: 5px;
-    z-index: 100;
-  }
-  
-  .dropdown-content .NavLink {
-    padding: 8px 12px;
-    font-size: 14px;
-    white-space: nowrap;
-  }
-  
-  .dropdown-content .NavLink:hover {
-    background-color: #f0f0f0;
-  }
-  
+}
+
+/* Optional: Add a subtle hover effect on the entire sidebar */
+.sidebar:hover {
+  box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+}

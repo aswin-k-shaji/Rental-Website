@@ -11,8 +11,8 @@ const Navbar = () => {
 
   const { setShowSearch, getCartCount } = useContext(ShopeContext);
   const navigate = useNavigate();
-
-  const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
+``
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,15 +32,19 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('userId'); // Clear user ID from local storage
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('userId');
+    navigate('/login');
+  };
+
+  const handleOrders = () => {
+    navigate('/profile/request');
   };
 
   const handleProfile = () => {
     if (userId) {
-      navigate('/profile'); // Navigate to profile page if user ID is set
+      navigate('/profile');
     } else {
-      navigate('/login'); // Redirect to login if no user ID is found
+      navigate('/login');
     }
   };
 
@@ -90,14 +94,10 @@ const Navbar = () => {
             {isDropdownOpen && (
               <div className="dropdown-menu">
                 <p onClick={handleProfile}>My Profile</p>
-                <p>Orders</p>
+                <p onClick={handleOrders} >Orders</p>
                 <p onClick={handleLogout}>Logout</p>
               </div>
             )}
-            <Link to="/Cart" className="cart-container1">
-              <img src={assets.cart} alt="Cart" className="cart-image" />
-              <p className="cart-count">{getCartCount()}</p>
-            </Link>
           </div>
         )}
         {!userId && (

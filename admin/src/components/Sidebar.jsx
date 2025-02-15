@@ -11,42 +11,59 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar-container" style={{ width: "17%", paddingLeft: '40px' }}>
-      <div className="sidebar-menu" style={{ height: '500px' }}>
-        <div className="dropdown">
-          <div className="dropdown-header" onClick={() => toggleDropdown('items')}>
+    <div className="sidebar">
+      <div className="sidebar-content">
+        <NavLink to="/" className="menu-item">
+          <img src={assets.home || '🏠'} alt="" />
+          <span>HOME</span>
+        </NavLink>
+
+        <div className="menu-group">
+          <div 
+            className={`menu-item ${openDropdown === 'items' ? 'active' : ''}`} 
+            onClick={() => toggleDropdown('items')}
+          >
             <img src={assets.lists} alt="" />
-            <p>ITEMS</p>
+            <span>ITEMS</span>
           </div>
-          {openDropdown === 'items' && (
-            <div className="dropdown-content">
-              <NavLink className="NavLink" to="/List">📄 View Items</NavLink>
-              <NavLink className="NavLink" to="/add">➕ Add Item</NavLink>
-            </div>
-          )}
+          <div className={`submenu ${openDropdown === 'items' ? 'open' : ''}`}>
+            <NavLink to="/List" className="submenu-item">
+              <span>📄</span> View Items
+            </NavLink>
+            <NavLink to="/add" className="submenu-item">
+              <span>➕</span> Add Item
+            </NavLink>
+          </div>
         </div>
-        <div className="dropdown">
-          <div className="dropdown-header" onClick={() => toggleDropdown('orders')}>
+
+        <div className="menu-group">
+          <div 
+            className={`menu-item ${openDropdown === 'orders' ? 'active' : ''}`}
+            onClick={() => toggleDropdown('orders')}
+          >
             <img src={assets.checkout} alt="" />
-            <p>ORDERS</p>
+            <span>ORDERS</span>
           </div>
-          {openDropdown === 'orders' && (
-            <div className="dropdown-content">
-              <NavLink className="NavLink" to="/orders">📄 View Orders</NavLink>
-            </div>
-          )}
+          <div className={`submenu ${openDropdown === 'orders' ? 'open' : ''}`}>
+            <NavLink to="/orders" className="submenu-item">
+              <span>📄</span> View Orders
+            </NavLink>
+          </div>
         </div>
-        <div className="dropdown">
-          <div className="dropdown-header" onClick={() => toggleDropdown('users')}>
+
+        <div className="menu-group">
+          <div 
+            className={`menu-item ${openDropdown === 'users' ? 'active' : ''}`}
+            onClick={() => toggleDropdown('users')}
+          >
             <img src={assets.users} alt="" />
-            <p>USERS</p>
+            <span>USERS</span>
           </div>
-          {openDropdown === 'users' && (
-            <div className="dropdown-content">
-              <NavLink className="NavLink" to="/users">👥 View Users</NavLink>
-              {/* <NavLink className="NavLink" to="/AddUser">➕ Add User</NavLink> */}
-            </div>
-          )}
+          <div className={`submenu ${openDropdown === 'users' ? 'open' : ''}`}>
+            <NavLink to="/users" className="submenu-item">
+              <span>👥</span> View Users
+            </NavLink>
+          </div>
         </div>
       </div>
     </div>

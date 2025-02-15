@@ -82,7 +82,7 @@ const Product = () => {
             <span>(122 reviews)</span>
           </div>
           <div className="product-price">{currency}{productData.pricePerDay}</div>
-          <p className="product-description">{productData.description}</p>
+          <p className="product-description"></p>
           <p className="product-contact">Contact: {productData.contact}</p>
           <p className="product-category">Category: {productData.category}</p>
           <p className="product-owner">
@@ -101,7 +101,6 @@ const Product = () => {
       <div className="description-review">
         <div className="description-review-header">
           <b className="description-title">Description</b>
-          <span className="review-count">Reviews (300)</span>
         </div>
         <div className="review-content">
           <p>Customer reviews will be displayed here.</p>

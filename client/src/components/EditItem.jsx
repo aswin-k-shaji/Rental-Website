@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
-import './EditProductModal.css';
+import './EditItem.css';
 import { assets } from '../assets/assets';
 
-const EditProductModal = ({ product, onClose }) => {
+const EditItem = ({ product, onClose }) => {
     const [updatedProduct, setUpdatedProduct] = useState({});
     const [images, setImages] = useState([null, null, null, null]);
     const [loading, setLoading] = useState(false);
@@ -252,4 +252,4 @@ const EditProductModal = ({ product, onClose }) => {
     );
 };
 
-export default EditProductModal;
+export default EditItem;

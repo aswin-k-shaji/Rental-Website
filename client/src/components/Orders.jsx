@@ -69,11 +69,11 @@ const Orders = () => {
                   <img src={order.item.image[0]} alt={order.item.title} className="order-image" />
                   <div className="order-details">
                     <h2>{order.item.title}</h2>
-                    <p><strong>Price per Day:</strong> ${order.item.pricePerDay}</p>
+                    <p><strong>Price per Day:</strong> Rs {order.item.pricePerDay}</p>
                     <p><strong>Start Date:</strong> {new Date(order.startDate).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
                     <p><strong>Return Date:</strong> {new Date(order.returnDate).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
 
-                    <p><strong>Total Amount:</strong> ${order.totalAmount}</p>
+                    <p><strong>Total Amount:</strong> Rs {order.totalAmount}</p>
                   </div>
                 </>
               ) : (

@@ -76,7 +76,7 @@ const removeProduct = async (req, res) => {
 const singleProduct = async (req, res) => {
     try {
         const { itemId } = req.body;
-        const item = await itemModel.findById(itemId).populate('owner', 'name email');
+        const item = await itemModel.findById(itemId).populate('owner','name email');
         if (!item) {
             return res.status(404).json({ success: false, message: 'Product not found' });
         }

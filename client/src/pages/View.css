@@ -60,7 +60,7 @@
     margin-top: 0.8rem;
 }
 
-.details-btn, .remove-btn {
+.detail-btn, .remove-btn {
     flex: 1;
     padding: 0.4rem;
     border: none;
