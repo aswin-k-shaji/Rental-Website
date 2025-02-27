@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import Title from '../components/Title';
 const View = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserItems();
