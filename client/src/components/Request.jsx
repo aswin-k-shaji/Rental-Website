@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./Request.css";
+import Title from "./Title";
 
 const Request = () => {
   const [orders, setOrders] = useState([]);
@@ -29,7 +30,7 @@ const Request = () => {
 
   return (
     <div className="request-container">
-      <h2>Order Requests</h2>
+      <Title text1={"ORDER"} text2={"REQUESTS"}></Title>
       {orders.length === 0 ? (
         <p>No orders found.</p>
       ) : (

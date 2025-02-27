@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Orders.css";
+import Title from "./Title";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -52,7 +53,7 @@ const Orders = () => {
 
   return (
     <div className="orders-container">
-      <h1>Your Orders</h1>
+      <Title text1={"YOUR"} text2={"ORDERS"}></Title>
 
       {loading ? (
         <p>Loading...</p>

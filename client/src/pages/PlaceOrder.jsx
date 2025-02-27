@@ -161,14 +161,7 @@ const PlaceOrder = () => {
         <div>
           <Title text1={'PAYMENT'} text2={'METHOD'} />
           <div className="payment-methods">
-            <div className="payment-method">
-              <p className={`${method === 'stripe' ? 'selected' : ''}`}></p>
-              <img onClick={() => setMethod('stripe')} src={assets.stripe_logo} alt="Stripe" />
-            </div>
-            <div className="payment-method">
-              <p className={`${method === 'razorpay' ? 'selected' : ''}`}></p>
-              <img onClick={() => setMethod('razorpay')} src={assets.razorpay_logo} alt="Razorpay" />
-            </div>
+          ~
             <div onClick={() => setMethod('cod')} className="payment-method">
               <p className={`${method === 'cod' ? 'selected' : ''}`}></p>
               <p>CASH ON DELIVERY</p>

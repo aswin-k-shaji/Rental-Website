@@ -4,6 +4,7 @@ import axios from 'axios';
 import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
 import './View.css';
+import Title from '../components/Title';
 
 const View = () => {
   const [items, setItems] = useState([]);
@@ -56,7 +57,7 @@ const View = () => {
 
   return (
     <div className="view-container">
-      <h2>Your Created Items</h2>
+      <Title text1={"YOUR CREATED"} text2={"ITEMS"} ></Title>
 
       {loading ? (
         <p>Loading...</p>
