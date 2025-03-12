@@ -4,7 +4,8 @@ import {
     addProduct,
     removeProduct,
     singleProduct,
-    updateProduct
+    updateProduct,
+    restoreItemQuantity
 } from '../controllers/productController.js';
 import upload from '../middleware/multer.js';
 
@@ -22,6 +23,7 @@ productRouter.post(
 productRouter.post('/remove',removeProduct);
 productRouter.post('/single', singleProduct);
 productRouter.get('/list', listProduct);
+productRouter.post('/restore',restoreItemQuantity);
 productRouter.patch(
     '/update',
     upload.fields([

@@ -6,37 +6,59 @@ import mongoose from "mongoose";
 
 export const placeOrder = async (req, res) => {
   try {
-    const { userId, itemId, startDate, returnDate, totalAmount, paymentMethod, deliveryInfo } = req.body;
+    // Extract required fields, including the quantity ordered
+    const { userId, itemId, startDate, returnDate, totalAmount, paymentMethod, deliveryInfo, quantity } = req.body;
+    
+    // Validate that quantity is provided and is a positive number
+    if (!quantity || quantity <= 0) {
+      return res.status(400).json({ error: "Quantity must be a positive number" });
+    }
 
+    // Find the user
     const user = await userModel.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
+    // Find the item
     const item = await itemModel.findById(itemId);
     if (!item) {
       return res.status(404).json({ error: "Item not found" });
     }
 
-    const ownerId = item.owner; 
+    // Ensure the item has an owner
+    const ownerId = item.owner;
     if (!ownerId) {
       return res.status(404).json({ error: "Owner not found for this item" });
     }
 
+    // Validate start and return dates
     if (!startDate || !returnDate) {
       return res.status(400).json({ error: "Start date and return date are required" });
     }
-
     const start = new Date(startDate);
     const end = new Date(returnDate);
     if (end <= start) {
       return res.status(400).json({ error: "Return date must be after the start date" });
     }
-    const calculatedAmount = Math.ceil((end - start) / (1000 * 60 * 60 * 24) + 1) * item.pricePerDay;
+
+    // Check if the requested quantity is available
+    if (quantity > item.Available) {
+      return res.status(400).json({ error: `Requested quantity exceeds available stock. Only ${item.Available} unit(s) available.` });
+    }
+
+    // Calculate the expected total amount
+    const diffDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+    const calculatedAmount = diffDays * item.pricePerDay * quantity;
     if (calculatedAmount !== totalAmount) {
       return res.status(400).json({ error: "Total amount calculation mismatch" });
     }
 
+    // Deduct the ordered quantity from the Available count and save the updated item
+    item.Available -= quantity;
+    await item.save();
+
+    // Create the order and include the Quantity field (capital Q to match your schema)
     const newOrder = new orderModel({
       userId,
       itemId,
@@ -46,10 +68,11 @@ export const placeOrder = async (req, res) => {
       totalAmount,
       paymentMethod,
       deliveryInfo,
+      Quantity: quantity,
     });
-
     await newOrder.save();
 
+    // Update the user's orderIds list
     user.orderIds.push(newOrder._id);
     await user.save();
 
@@ -59,8 +82,6 @@ export const placeOrder = async (req, res) => {
     res.status(500).json({ error: "An error occurred while placing the order" });
   }
 };
-
-
 
 
 export const getUserOrders = async (req, res) => {

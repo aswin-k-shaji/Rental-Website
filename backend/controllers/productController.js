@@ -1,11 +1,19 @@
 import { v2 as cloudinary } from 'cloudinary';
 import itemModel from '../models/items.js';
 import { userModel } from './userController.js';
+import orderModel from "../models/order.js";
+
 
 // Add Product
 const addProduct = async (req, res) => {
     try {
-        const { title, description, category, owner,NumberOfItems, pricePerDay, contact, location } = req.body;
+        const { title, description, category, owner, NumberOfItems, pricePerDay, contact, location } = req.body;
+        
+        // Validate NumberOfItems to be a positive number
+        if (!NumberOfItems || isNaN(NumberOfItems) || Number(NumberOfItems) <= 0) {
+            return res.status(400).json({ success: false, message: 'NumberOfItems must be a positive number' });
+        }
+
         const image1 = req.files?.image1?.[0];
         const image2 = req.files?.image2?.[0];
         const image3 = req.files?.image3?.[0];
@@ -25,7 +33,8 @@ const addProduct = async (req, res) => {
             description,
             category,
             owner,
-            NumberOfItems,
+            NumberOfItems: Number(NumberOfItems),
+            Available: Number(NumberOfItems), 
             pricePerDay: Number(pricePerDay),
             contact: Number(contact),
             location,
@@ -44,12 +53,13 @@ const addProduct = async (req, res) => {
         user.createdProducts.push(item._id);
         await user.save();
 
-        res.json({ success: true, message: 'Item added', item });
+        res.json({ success: true, message: 'Item added successfully', item });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
 
 
 // List Products
@@ -192,6 +202,69 @@ const updateProduct = async (req, res) => {
         });
     }
 };
+
+
+
+
+
+
+export const restoreItemQuantity = async (req, res) => {
+  try {
+    const { itemId } = req.body;
+
+    console.log("i am here ");
+    
+    
+    // Validate itemId
+    if (!itemId) {
+      return res.status(400).json({ error: "Item ID is required" });
+    }
+    console.log(itemId);
+    
+    if (!mongoose.Types.ObjectId.isValid(itemId)) {
+      return res.status(400).json({ error: "Invalid Item ID" });
+    }
+    
+    // Find the item
+    const item = await itemModel.findById(itemId);
+    if (!item) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+    
+    // Find orders for this item whose return date has passed 
+    // and that haven't been processed (i.e. orderStatus is not "completed")
+    const expiredOrders = await orderModel.find({
+      itemId: itemId,
+      returnDate: { $lt: new Date() },
+      orderStatus: { $ne: "completed" }
+    });
+    
+    // Sum the quantities from expired orders and mark them as completed to avoid reprocessing
+    let totalRestoreQty = 0;
+    for (const order of expiredOrders) {
+      totalRestoreQty += order.Quantity;
+      order.orderStatus = "completed";
+      await order.save();
+    }
+    
+    // Update the item's Available field, ensuring it does not exceed the total NumberOfItems
+    item.Available = Math.min(item.Available + totalRestoreQty, item.NumberOfItems);
+    await item.save();
+    
+    res.status(200).json({
+      message: "Item quantity restored successfully",
+      restoredQuantity: totalRestoreQty,
+      item,
+    });
+  } catch (error) {
+    console.error("Error restoring item quantity:", error);
+    res.status(500).json({ error: "An error occurred while restoring item quantity" });
+  }
+};
+
+
+
+
 
 
 export { listProduct, addProduct, removeProduct, singleProduct, updateProduct };

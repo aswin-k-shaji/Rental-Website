@@ -9,7 +9,6 @@
 .product-container {
   display: flex;
   gap: 2rem;
-  margin-bottom: 2rem;
   background: #ffffff;
   padding: 1rem;
   border-radius: 10px;
@@ -117,7 +116,8 @@
 }
 
 .description-review {
-  margin-top: 2rem;
+  width:700px;
+  height:300px;
   background: #ffffff;
   padding: 1rem;
   border-radius: 10px;
@@ -150,3 +150,79 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
 }
+
+
+
+
+
+/* Calendar Styling */
+.availability-calendar {
+  display: flex;
+  flex-direction:row;
+  justify-content:space-between;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.availability-calendar h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 400px;
+  background: #646161;
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
+.react-calendar__tile {
+  text-align: center;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.react-calendar__tile--now {
+  background: #ff9800 !important; /* Highlight today's date */
+  color: white !important;
+}
+
+.react-calendar__tile--active {
+  background: #28a745 !important; /* Green for selected */
+  color: white !important;
+}
+
+.reserved-date {
+  background-color: #dc3545 !important; /* Dark Red for reserved */
+  color: white !important;
+  border-radius: 8px;
+}
+
+
+
+
+.review-content {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.review-content h3 {
+  font-size: 1.4rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.description-box p {
+  margin-bottom: 10px;
+}
+

@@ -5,6 +5,7 @@ const itemSchema = new mongoose.Schema({
   description: { type: String, required: true } ,
   category: { type: String, required: true },
   NumberOfItems:{type:Number},
+  Available:{type:Number},
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
