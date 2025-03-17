@@ -267,4 +267,9 @@ export const restoreItemQuantity = async (req, res) => {
 
 
 
+
+
+
+
+
 export { listProduct, addProduct, removeProduct, singleProduct, updateProduct };

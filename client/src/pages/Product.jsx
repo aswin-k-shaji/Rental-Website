@@ -10,6 +10,7 @@ import RelatedProducts from '../components/RelatedProducts';
 import { assets } from '../assets/assets';
 import './Product.css';
 import Title from '../components/Title';
+import Review from '../components/Review';
 
 const Product = () => {
   const { productId } = useParams();
@@ -18,6 +19,8 @@ const Product = () => {
   const [image, setImage] = useState();
   const [reservedDates, setReservedDates] = useState([]);
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId"); // Get user ID from localStorage
+
 
   // Fetch product details
   useEffect(() => {
@@ -64,7 +67,7 @@ const Product = () => {
     }
 
     try {
-      const response = await axios.patch("http://localhost:4000/api/user/add-to-cart", {
+      const response = await axios.post("http://localhost:4000/api/user/add-to-cart", {
         userId,
         productId,
       });
@@ -98,7 +101,7 @@ const Product = () => {
   const handleDateClick = (date) => {
     const formattedDate = date.toISOString().split('T')[0];
     if (reservedDates.includes(formattedDate)) {
-      toast.error("Date not available");
+      toast.error("");
     }
   };
 
@@ -131,10 +134,9 @@ const Product = () => {
             <span>(122 reviews)</span>
           </div>
           <div className="product-price">{currency}{productData.pricePerDay}</div>
-          <p className="product-description">{productData.description}</p>
           <p className="product-contact">Contact: {productData.contact}</p>
           <p className="product-category">Category: {productData.category}</p>
-          <p className="product-category">Available: {productData.Available}</p>
+          <p style={{color:'red'}} className="product-category">Available: {productData.Available}/{productData.NumberOfItems}</p>
           <p className="product-owner">
             Owner: {typeof productData.owner === 'object' ? `${productData.owner.name} (${productData.owner.email})` : productData.owner}
           </p>
@@ -150,8 +152,8 @@ const Product = () => {
             <Calendar
               tileClassName={tileClassName}
               onClickDay={handleDateClick}
-              showNavigation={true} // Enables navigation
-              showNeighboringMonth={false} // Hides previous/next month's days
+              showNavigation={true}
+              showNeighboringMonth={false}
               view="month"
             />
             <div className="description-review">
@@ -168,8 +170,13 @@ const Product = () => {
               </div>
             </div>
           </div>
+
+          <div>
+              <Review productId={productId} userId={userId} />
+          </div>
       
       <RelatedProducts category={productData.category} />
+
     </div>
   ) : (
     <div>Loading...</div>

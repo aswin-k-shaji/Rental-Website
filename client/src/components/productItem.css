@@ -1,46 +1,49 @@
-.card-link {
-    text-decoration: none;
-    color: inherit;
-    font: optional;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .card {
-    margin: 16px;
-    text-align: center;
-    background-color: #fff;
-    width: 60px;
-  }
-  
-  .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
-  }
-  .card img {
-    max-width: 100%;
-    margin-bottom: 12px;
-    height: 200px;
-    object-fit: cover;
-  }
+/* ProductItem.css */
+.pi-card-link {
+  text-decoration: none;
+  color: #333;
+  display: inline-block;
+}
 
-  .card p {
-    margin: 8px 0;
-    color: #333;
-  }
-  
-  .card p:first-of-type {
-    font-size: 1 rem;
-  }
-  
-  .card p:last-of-type {
-    color: #000000;
-    font-size: 1 em;
-  }
-  
-  @media (min-width: 600px) {
-    .card {
-      width: 200px;
-    }
-  }
-  
+.pi-card {
+  width: 200px;
+  background-color: #fff;
+  margin: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pi-image-container {
+  height: 150px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.pi-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pi-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 5px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+
+.pi-price {
+  font-size: 16px;
+  color: #16902c;
+  font-weight: bold;
+  margin: 5px 0;
+  padding: 0 10px;
+}

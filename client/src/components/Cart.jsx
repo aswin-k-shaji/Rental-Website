@@ -52,7 +52,6 @@ const Cart = () => {
               <h3 onClick={() => navigate(`/product/${item._id}`)} style={{ cursor: "pointer" }}>
                 {item.title}
               </h3>
-              <p>{item.description}</p>
               <p>Price per day: <strong>Rs {item.pricePerDay}</strong></p>
               <button className="remove-btn" onClick={() => removeItemFromCart(item._id)}>Remove</button>
             </div>

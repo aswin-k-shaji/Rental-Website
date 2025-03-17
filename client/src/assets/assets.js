@@ -38,9 +38,13 @@ import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
 import upload_area from './upload_area.png'
+import like from './like-nofill.png'
+import dlike from './dislike-nofill.png'
 
 export const assets = {
       search,
+      like,
+      dlike,
       user,
       cart,
     logo,
