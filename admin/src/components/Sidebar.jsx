@@ -15,7 +15,7 @@ const Sidebar = () => {
       <div className="sidebar-content">
         <NavLink to="/" className="menu-item">
           <img src={assets.home || '🏠'} alt="" />
-          <span>HOME</span>
+          <span>Home</span>
         </NavLink>
 
         <div className="menu-group">
@@ -24,7 +24,7 @@ const Sidebar = () => {
             onClick={() => toggleDropdown('items')}
           >
             <img src={assets.lists} alt="" />
-            <span>ITEMS</span>
+            <span>Items</span>
           </div>
           <div className={`submenu ${openDropdown === 'items' ? 'open' : ''}`}>
             <NavLink to="/List" className="submenu-item">
@@ -42,7 +42,7 @@ const Sidebar = () => {
             onClick={() => toggleDropdown('orders')}
           >
             <img src={assets.checkout} alt="" />
-            <span>ORDERS</span>
+            <span>Orders</span>
           </div>
           <div className={`submenu ${openDropdown === 'orders' ? 'open' : ''}`}>
             <NavLink to="/orders" className="submenu-item">
@@ -57,7 +57,7 @@ const Sidebar = () => {
             onClick={() => toggleDropdown('users')}
           >
             <img src={assets.users} alt="" />
-            <span>USERS</span>
+            <span>Users</span>
           </div>
           <div className={`submenu ${openDropdown === 'users' ? 'open' : ''}`}>
             <NavLink to="/users" className="submenu-item">
@@ -65,6 +65,10 @@ const Sidebar = () => {
             </NavLink>
           </div>
         </div>
+        <NavLink to="/" className="menu-item">
+          <img src={assets.home || '🏠'} alt="" />
+          <span>Message</span>
+        </NavLink>
       </div>
     </div>
   );

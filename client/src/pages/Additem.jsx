@@ -171,6 +171,10 @@ const Additem = () => {
             <option value="Machines">Machines</option>
             <option value="House">House/Rooms</option>
             <option value="Accessories">Accessories</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Function">Function</option>
+            <option value="Tools">Tool</option>
+
           </select>
         </div>
 
@@ -180,7 +184,7 @@ const Additem = () => {
             onChange={(e) => setContact(e.target.value)}
             value={contact}
             placeholder="Mobile number"
-            type="number"
+            type="string"
             className="add-input"
             required
             disabled={loading}

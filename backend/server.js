@@ -7,6 +7,7 @@ import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 import reviewRouter from "./routes/reviewRoutes.js"; // ✅ Import review routes
+import messageRouter from "./routes/messageRoute.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -24,6 +25,8 @@ app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/reviews', reviewRouter);
+app.use('/api/message', messageRouter);
+
 
 // Test API Route
 app.get('/', (req, res) => {

@@ -1,169 +1,232 @@
 .carousel-container {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  margin: 2rem auto;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.carousel-image.transitioning {
+  opacity: 0.8;
+  transform: scale(1.03);
+}
+
+.carousel-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 4rem;
+  transition: background 0.4s ease;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.carousel-content {
+  max-width: 550px;
+  color: white;
+  transition: transform 0.4s ease;
+}
+
+.carousel-content h2 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+
+.carousel-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.book-now-btn {
+  background-color: transparent;
+  color: white;
+  padding: 0.8rem 2rem;
+  border: 2px solid white;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-now-btn:hover {
+  background-color: white;
+  color: #333;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 10;
+}
+
+.nav-button:hover {
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-button {
+  left: 15px;
+}
+
+.next-button {
+  right: 15px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 30px;
+  height: 4px;
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.dot.active {
+  background-color: white;
+  width: 40px;
+}
+
+/* Add category-specific styling */
+.Electronics .carousel-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(66, 0, 131, 0.8) 0%,
+    rgba(66, 0, 131, 0.5) 50%,
+    rgba(66, 0, 131, 0.2) 100%
+  );
+}
+
+.Bikes .carousel-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(131, 58, 180, 0.8) 0%,
+    rgba(131, 58, 180, 0.5) 50%,
+    rgba(131, 58, 180, 0.2) 100%
+  );
+}
+
+.Machines .carousel-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(195, 20, 50, 0.8) 0%,
+    rgba(195, 20, 50, 0.5) 50%,
+    rgba(195, 20, 50, 0.2) 100%
+  );
+}
+
+.Accessories .carousel-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(225, 77, 42, 0.8) 0%,
+    rgba(225, 77, 42, 0.5) 50%,
+    rgba(225, 77, 42, 0.2) 100%
+  );
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .carousel-container {
+    height: 400px;
   }
-  
-  .carousel-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .carousel-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.5s ease-in-out;
-  }
-  
-  .carousel-image.transitioning {
-    opacity: 0.7;
-  }
-  
-  .carousel-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(66, 0, 131, 0.6) 0%,
-      rgba(195, 20, 50, 0.6) 100%
-    );
-    display: flex;
-    align-items: center;
-    padding: 0 2rem;
-  }
-  
-  .carousel-content {
-    max-width: 600px;
-    color: white;
-  }
-  
+
   .carousel-content h2 {
     font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
-  
+
   .carousel-content p {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
   }
-  
-  .book-now-btn {
-    background-color: white;
-    color: #42008d;
-    padding: 0.75rem 2rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+
+  .carousel-overlay {
+    padding: 0 2.5rem;
   }
-  
-  .book-now-btn:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    height: 350px;
+    border-radius: 8px;
   }
-  
-  .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    color: #333;
+
+  .carousel-content h2 {
+    font-size: 2rem;
   }
-  
-  .nav-button:hover {
-    background-color: white;
-    transform: translateY(-50%) scale(1.1);
+
+  .carousel-overlay {
+    padding: 0 1.5rem;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
   }
-  
-  .prev-button {
-    left: 20px;
-  }
-  
-  .next-button {
-    right: 20px;
-  }
-  
-  .carousel-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-  }
-  
+
   .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
+    width: 20px;
+    height: 3px;
   }
   
   .dot.active {
-    background-color: white;
-    transform: scale(1.2);
+    width: 30px;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .carousel-container {
-      height: 400px;
-    }
-  
-    .carousel-content h2 {
-      font-size: 2rem;
-    }
-  
-    .carousel-content p {
-      font-size: 1rem;
-    }
-  
-    .nav-button {
-      width: 35px;
-      height: 35px;
-      font-size: 20px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .carousel-container {
-      height: 300px;
-    }
-  
-    .carousel-content h2 {
-      font-size: 1.5rem;
-    }
-  
-    .carousel-content p {
-      font-size: 0.875rem;
-    }
-  
-    .nav-button {
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-    }
-  }
+}

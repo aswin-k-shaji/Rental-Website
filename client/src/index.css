@@ -10,6 +10,16 @@
   font-style: normal;
 }
 
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #6cae7c 29%, #20c997 100%);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
+}
+
+
+
 ::-webkit-scrollbar{
   display: none;
 }

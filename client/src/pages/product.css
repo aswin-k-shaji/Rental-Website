@@ -62,12 +62,15 @@
 .product-details {
   flex: 2;
   padding: 1rem;
+  padding-top: 50px;
 }
 
 .product-title {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #333;
+  display: flex;
+  align-items: start;
 }
 
 .product-rating {

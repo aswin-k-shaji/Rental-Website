@@ -8,11 +8,7 @@ const LatestCollection = () => {
   const { products} = useContext(ShopeContext);
   const [latestProducts, setLatestProducts] = useState([]);
 
-  // useEffect(() => {
-  //   if (Array.isArray(products) && products.length > 0) {
-  //     setLatestProducts(products.slice(0,2));
-  //   }
-  // }, [products]);
+
 
   useEffect(() => {
     setLatestProducts(products);

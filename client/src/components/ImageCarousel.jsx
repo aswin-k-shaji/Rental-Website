@@ -5,30 +5,25 @@ const CategoryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Product categories data with background colors
   const categories = [
     {
       name: 'Electronics',
       description: 'Latest gadgets and tech devices at incredible prices',
-      ctaText: 'Browse Electronics',
       color: 'rgba(66, 0, 131, 0.6)'
     },
     {
       name: 'Bikes',
       description: 'Mountain, road and electric bikes for every terrain',
-      ctaText: 'Explore Bikes',
       color: 'rgba(131, 58, 180, 0.6)'
     },
     {
       name: 'Machines',
       description: 'Industrial and home equipment for professionals',
-      ctaText: 'Shop Machines',
       color: 'rgba(195, 20, 50, 0.6)'
     },
     {
       name: 'Accessories',
       description: 'Essential add-ons to upgrade your experience',
-      ctaText: 'View Accessories',
       color: 'rgba(225, 77, 42, 0.6)'
     }
   ];
@@ -64,32 +59,24 @@ const CategoryCarousel = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
-    }, 2000); // Changed to 2 seconds as requested earlier
+    }, 2000); 
 
     return () => clearInterval(timer);
-  }, []);
+  }, [currentIndex, isTransitioning]); // Added dependencies
 
   // Get current category
   const currentCategory = categories[currentIndex];
-
-  // Generate background style based on current category
-  const getOverlayStyle = () => {
-    const color = currentCategory.color;
-    return {
-      background: `linear-gradient(135deg, ${color} 0%, rgba(195, 20, 50, 0.6) 100%)`
-    };
-  };
-
+  
   return (
     <div className="carousel-container">
-      <div className="carousel-wrapper">
+      <div className={`carousel-wrapper ${currentCategory.name}`}>
         {/* Using a div instead of img, with background color */}
         <div 
           className={`carousel-image ${isTransitioning ? 'transitioning' : ''}`}
           style={{ backgroundColor: '#f5f5f5' }}
         />
         
-        <div className="carousel-overlay" style={getOverlayStyle()}>
+        <div className="carousel-overlay">
           <div className="carousel-content">
             <h2>{currentCategory.name}</h2>
             <p>{currentCategory.description}</p>

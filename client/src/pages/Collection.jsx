@@ -82,6 +82,9 @@ const Collection = () => {
             <p><input className='inputt' type="checkbox" value="Electronics" onChange={togglecategory} />  Electronics</p>
             <p><input className='inputt' type="checkbox" value="Machines" onChange={togglecategory} />  Machines</p>
             <p><input className='inputt' type="checkbox" value="House/Rooms" onChange={togglecategory} />  House/Rooms</p>
+            <p><input className='inputt' type="checkbox" value="Kitchen" onChange={togglecategory} />Kitchen</p>
+            <p><input className='inputt' type="checkbox" value="Function" onChange={togglecategory} />Function</p>
+
           </div>
         </div>
         <div className="filter-price">

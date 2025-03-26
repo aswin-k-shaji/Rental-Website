@@ -13,7 +13,7 @@ const itemSchema = new mongoose.Schema({
   },
   pricePerDay: { type: Number, required: true },
   location: { type: String, required: true },
-  contact: { type: Number,required: true },
+  contact: { type: String,required: true},
   status: { type: String, enum: ['available', 'rented'], default: 'available' },
   image: { type: Array, required: true },
   date: { type: Date, default: Date.now },

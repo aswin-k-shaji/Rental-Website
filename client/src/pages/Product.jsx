@@ -124,15 +124,17 @@ const Product = () => {
           </div>
         </div>
         <div className="product-details">
-          <h1 className="product-title">{productData.title}</h1>
           <div className="product-rating">
-            <img src={assets.star_icon} alt="Star" />
-            <img src={assets.star_icon} alt="Star" />
-            <img src={assets.star_icon} alt="Star" />
-            <img src={assets.star_icon} alt="Star" />
-            <img src={assets.star_dull_icon} alt="Star" />
-            <span>(122 reviews)</span>
+              {/* <img src={assets.star_icon} alt="Star" />
+              <img src={assets.star_icon} alt="Star" />
+              <img src={assets.star_icon} alt="Star" />
+              <img src={assets.star_icon} alt="Star" />
+              <img src={assets.star_dull_icon} alt="Star" /> */}
           </div>
+          <h1 className="product-title">{productData.title}</h1>
+
+          <span>(122 reviews)</span>
+
           <div className="product-price">{currency}{productData.pricePerDay}</div>
           <p className="product-contact">Contact: {productData.contact}</p>
           <p className="product-category">Category: {productData.category}</p>
@@ -141,8 +143,10 @@ const Product = () => {
             Owner: {typeof productData.owner === 'object' ? `${productData.owner.name} (${productData.owner.email})` : productData.owner}
           </p>
           <p className="product-location">Location: {productData.location}</p>
+          <div className="butt">
           <button onClick={handleAddToCart} className="add-to-favorite">Save</button>
           <button onClick={handleBookNow} className="add-to-favorite">Book Now</button>
+          </div>
 
 
         </div>

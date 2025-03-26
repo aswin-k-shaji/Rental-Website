@@ -1,136 +1,123 @@
-import React, { useState } from 'react';
-import Title from '../components/Title';
-import { assets } from '../assets/assets';
-import './Contact.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import './Contact.css'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    messageType: "general",
   });
-
+  
+  const [userId, setUserId] = useState(null);
+  
+  // Check local storage for userId
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  }, []);
+  
+  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
-
-  const handleSubmit = (e) => {
+  
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    console.log('Form submitted:', formData);
+    // Create the request payload - only include userId if it exists
+    const requestData = {
+      ...formData
+    };
+    
+    if (userId) {
+      requestData.userId = userId;
+    }
+    
+    try {
+      const response = await axios.post("http://localhost:4000/api/message/send", requestData);
+      if (response.status === 201) {
+        toast.success("Message sent successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          messageType: "general",
+        });
+      }
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+    }
   };
-
+  
   return (
     <div className="contact-container">
-      <div className="contact-header">
-        <Title text1={'CONTACT'} text2={'US'}/>
-      </div>
-
-      <div className="contact-content">
-        <div className="contact-info-section">
-          <img src={assets.Contact} alt="Contact" className="contact-image" />
-          <div className="contact-details">
-            <h2>Get in Touch</h2>
-            <div className="contact-info-item">
-              <i className="fas fa-map-marker-alt"></i>
-              <div>
-                <h3>Our Location</h3>
-                <p>123 Rental Street</p>
-                <p>Business District, City 12345</p>
-              </div>
-            </div>
-            
-            <div className="contact-info-item">
-              <i className="fas fa-phone"></i>
-              <div>
-                <h3>Phone Numbers</h3>
-                <p>Main: +1 (987) 256-7285</p>
-                <p>Support: +1 (987) 256-7286</p>
-              </div>
-            </div>
-            
-            <div className="contact-info-item">
-              <i className="fas fa-envelope"></i>
-              <div>
-                <h3>Email</h3>
-                <p>Rental@gmail.com</p>
-                <p>Support@rental.com</p>
-              </div>
-            </div>
-
-            <div className="contact-info-item">
-              <i className="fas fa-clock"></i>
-              <div>
-                <h3>Business Hours</h3>
-                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                <p>Saturday: 10:00 AM - 4:00 PM</p>
-              </div>
-            </div>
-          </div>
+      <h2>Contact Us</h2>
+      <form onSubmit={handleSubmit} className="contact-form">
+        <div className="form-group">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            required
+          />
         </div>
-
-        <div className="contact-form-section">
-          <h2>Send us a Message</h2>
-          <form onSubmit={handleSubmit} className="contact-form">
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Your Email"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                placeholder="Subject"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Your Message"
-                rows="5"
-                required
-              ></textarea>
-            </div>
-
-            <button type="submit" className="submit-button">
-              Send Message
-            </button>
-          </form>
+        <div className="form-group">
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            required
+          />
         </div>
-
-        <div className="map-section">
-          <h2>Find Us</h2>
+        <div className="form-group">
+          <input
+            type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            placeholder="Subject"
+            required
+          />
         </div>
-      </div>
+        <div className="form-group">
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Your Message"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+        <div className="form-group">
+          <select name="messageType" value={formData.messageType} onChange={handleChange}>
+            <option value="general">General Inquiry</option>
+            <option value="complaint">Complaint</option>
+            <option value="inquiry">Inquiry</option>
+            <option value="feedback">Feedback</option>
+          </select>
+        </div>
+        <button type="submit" className="submit-button">
+          Send Message
+        </button>
+      </form>
     </div>
   );
 };
