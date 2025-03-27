@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify'
 import UserList from './pages/UserList'
 import SingleItem from './pages/SingleItem'
 import Home from './pages/Home'
+import Message from './pages/Message'
 // import AddUser from './pages/Adduser'
 
 
@@ -44,6 +45,7 @@ const App = () => {
                 <Route path='/List' element={<Navigate to='/List'/>} />
                 <Route path="/product/:id" element={<SingleItem />} />
                 <Route path='/' element={<Home/>} />
+                <Route path='/Message' element={<Message/>} />
               </Routes>
             </div>
           </div>

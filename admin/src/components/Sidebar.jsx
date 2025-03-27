@@ -65,7 +65,7 @@ const Sidebar = () => {
             </NavLink>
           </div>
         </div>
-        <NavLink to="/" className="menu-item">
+        <NavLink to="/Message" className="menu-item">
           <img src={assets.home || '🏠'} alt="" />
           <span>Message</span>
         </NavLink>

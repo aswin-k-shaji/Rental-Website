@@ -1,0 +1,233 @@
+/* General container styling */
+.message-container {
+    width:100%;
+    margin: auto;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Table Styling */
+  .message-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message-table th, .message-table td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .message-table th {
+    background-color: #007bff;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .message-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .message-table tr:hover {
+    background-color: #eaf3ff;
+    transition: 0.3s;
+  }
+  
+  /* View Button */
+  .view-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-weight: bold;
+  }
+  
+  .view-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  /* Message Details Section */
+  .message-details {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .message-details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .message-details p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Reply Section */
+  .reply-section {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .reply-section textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .reply-section textarea:focus {
+    border: 1px solid #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Reply Button */
+  .reply-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .reply-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  
+  /* Warning for Unregistered Users */
+  .unregistered-warning {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .message-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.filter-container select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.message-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.message-table th,
+.message-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.message-table th {
+  background-color: #f4f4f4;
+}
+
+.view-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-btn:hover {
+  background-color: #0056b3;
+}
+
+.message-details {
+  background: #fafafa;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.reply-section {
+  margin-top: 10px;
+}
+
+.reply-section textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.reply-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.reply-btn:hover {
+  background-color: #218838;
+}
+
+.unregistered-warning {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

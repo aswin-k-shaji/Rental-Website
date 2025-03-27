@@ -109,14 +109,12 @@ const Orders = () => {
         <table style={{ width: '100%', minWidth: '1200px', borderCollapse: 'collapse' }}>
           <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white', boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
             <tr>
-              <th style={{ padding: '16px', textAlign: 'left' }}>Order ID</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Owner</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Delivery Information</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Item Details</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Customer</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Dates</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Payment</th>
-              <th style={{ padding: '16px', textAlign: 'left' }}>Status</th>
             </tr>
           </thead>
           <tbody>

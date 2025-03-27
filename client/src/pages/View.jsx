@@ -69,7 +69,6 @@ const View = () => {
             <div key={item._id} className="item-card">
               <img src={item.image[0]} alt={item.title} className="item-img" />
               <h3>{item.title}</h3>
-              <p>{item.description}</p>
               <p><strong>Price:</strong> ₹{item.pricePerDay} / day</p>
               <p><strong>Location:</strong> {item.location}</p>
               <p><strong>Contact:</strong> {item.contact}</p>

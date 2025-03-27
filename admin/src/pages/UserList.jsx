@@ -76,7 +76,6 @@ const UserList = ({ token }) => {
             <th>Name</th>
             <th>Email</th>
             {/* <th>User Type</th> */}
-            <th>Phone</th>
             <th>Address</th>
             <th>Action</th>
           </tr>
@@ -87,7 +86,6 @@ const UserList = ({ token }) => {
               <td>{user.name}</td>
               <td>{user.email}</td>
               {/* <td>{user.userType}</td> */}
-              <td>{user.phoneNumber}</td>
               <td>{user.address}</td>
               <td className="userlist-action">
                 <button
