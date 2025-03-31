@@ -40,10 +40,12 @@ import cross_icon from './cross_icon.png'
 import upload_area from './upload_area.png'
 import like from './like-nofill.png'
 import dlike from './dislike-nofill.png'
+import img from './img.jpg'
 
 export const assets = {
       search,
       like,
+      img,
       dlike,
       user,
       cart,

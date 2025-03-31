@@ -6,7 +6,7 @@ import ShopeContextProvider from './context/ShopeContext.jsx'
 createRoot(document.getElementById('root')).render(
   <BrowserRouter> 
   <ShopeContextProvider>
-    <App />
+    <App/>
   </ShopeContextProvider>
   </BrowserRouter>
 )

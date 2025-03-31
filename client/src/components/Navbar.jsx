@@ -1,17 +1,15 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import './Navbar.css';
 import { ShopeContext } from '../context/ShopeContext';
-import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-
   const { setShowSearch, getCartCount } = useContext(ShopeContext);
   const navigate = useNavigate();
-``
+
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
@@ -48,31 +46,48 @@ const Navbar = () => {
     }
   };
 
+  const handleStartRental = (e) => {
+    e.preventDefault(); // Prevent default <NavLink> behavior
+    if (userId) {
+      navigate('/profile/items/add');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <nav className="navbar">
       <h2 className="navbar-logo">Rental</h2>
 
       <ul className="navbar-links">
+        <li className="signup">
+          <NavLink
+            style={{ color: 'white', padding: '10px 45px', marginRight: '30px' }}
+            to="/signup"
+            exact="true"
+            onClick={handleStartRental}
+          >
+            Start Rental
+          </NavLink>
+        </li>
         <li>
           <NavLink to="/" exact="true">
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/collection" exact="true">
-            Items
-          </NavLink>
-        </li>
+        <li>|</li>
         <li>
           <NavLink to="/about" exact="true">
             About
           </NavLink>
         </li>
+        <li>|</li>
         <li>
           <NavLink to="/contact" exact="true">
             Contact
           </NavLink>
         </li>
+        <li>|</li>
       </ul>
 
       {/* Right Icons */}
@@ -83,7 +98,7 @@ const Navbar = () => {
           alt="Search"
           className="navbar-icon"
         />
-        {userId && (
+        {userId ? (
           <div className="dropdown" ref={dropdownRef}>
             <img
               src={assets.user}
@@ -94,19 +109,14 @@ const Navbar = () => {
             {isDropdownOpen && (
               <div className="dropdown-menu">
                 <p onClick={handleProfile}>My Profile</p>
-                <p onClick={handleOrders} >Orders</p>
+                <p onClick={handleOrders}>Orders</p>
                 <p onClick={handleLogout}>Logout</p>
               </div>
             )}
           </div>
-        )}
-        {!userId && (
+        ) : (
           <Link to="/login">
-            <img
-              src={assets.user}
-              alt="User"
-              className="navbar-icon"
-            />
+            <img src={assets.user} alt="User" className="navbar-icon" />
           </Link>
         )}
       </div>

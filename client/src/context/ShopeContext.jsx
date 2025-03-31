@@ -100,7 +100,7 @@ const ShopeContextProvider =(props)=>{
       
 
     const value ={
-        products,currency,delivery_fee,
+        products,currency,
         search , setSearch ,showSearch ,setShowSearch,
         cartItems,addToCart,getCartCount,updateQuantity,
         getCartAmount,navigate,backendUrl,token,setToken

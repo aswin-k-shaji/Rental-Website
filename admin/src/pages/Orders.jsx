@@ -109,12 +109,13 @@ const Orders = () => {
         <table style={{ width: '100%', minWidth: '1200px', borderCollapse: 'collapse' }}>
           <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white', boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
             <tr>
-              <th style={{ padding: '16px', textAlign: 'left' }}>Owner</th>
+              <th style={{ padding: '16px', textAlign: 'left' }}>Renter</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Delivery Information</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Item Details</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Customer</th>
               <th style={{ padding: '16px', textAlign: 'left' }}>Dates</th>
-              <th style={{ padding: '16px', textAlign: 'left' }}>Payment</th>
+              <th style={{ padding: '16px', textAlign: 'left' }}>Payment</th>             
+
             </tr>
           </thead>
           <tbody>
@@ -126,10 +127,10 @@ const Orders = () => {
 
               return (
                 <tr key={order._id} style={{ borderBottom: '1px solid #eee' }}>
-                  <td style={{ padding: '16px' }}>
+                  {/* <td style={{ padding: '16px' }}>
                     <div style={{ fontWeight: 500 }}>{order._id}</div>
                     <div style={{ fontSize: '14px', color: '#666' }}>{formatDate(order.createdAt)}</div>
-                  </td>
+                  </td> */}
 
                   <td style={{ padding: '16px' }}>
                     <div style={{ fontWeight: 500 }}>{owner.name || "Unknown Owner"}</div>
@@ -177,18 +178,7 @@ const Orders = () => {
                   </td>
 
                   <td style={{ padding: '16px' }}>
-                    <span style={{
-                      display: 'inline-block',
-                      padding: '4px 8px',
-                      borderRadius: '12px',
-                      fontSize: '14px',
-                      backgroundColor: order.orderStatus === 'completed' ? '#dcfce7' : 
-                                     order.orderStatus === 'pending' ? '#fef9c3' : '#f3f4f6',
-                      color: order.orderStatus === 'completed' ? '#166534' :
-                             order.orderStatus === 'pending' ? '#854d0e' : '#1f2937'
-                    }}>
-                      {order.orderStatus}
-                    </span>
+
                   </td>
                 </tr>
               );

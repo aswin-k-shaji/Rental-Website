@@ -8,7 +8,6 @@ body {
     display: flex;
     width:100%;
     flex-direction:row;
-    
 }
 .inputt{
     width:auto;
@@ -37,6 +36,12 @@ body {
 .filter-category p, .filter-price p {
     margin: 0 0 5px;
 }
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    gap:10px;
+}
 
 .filter-category div, .filter-price select {
     padding: 10px;
@@ -48,6 +53,7 @@ body {
 .product-list-container {
     background-color: #fff;
     padding: 20px;
+    width:100%;
 }
 
 .product-list {

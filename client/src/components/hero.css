@@ -1,134 +1,268 @@
-/* Hero Section Styles */
 .hero-section {
   width: 100%;
-  min-height: 85vh;
-  background-color: #ffffff;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   position: relative;
+  background-color: white;
   overflow: hidden;
 }
 
 .hero-wrapper {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 450px;
+  position: relative;
+  z-index: 2;
 }
-
 .hero-content {
   flex: 1;
   max-width: 550px;
-  z-index: 2;
+  animation: fadeIn 0.8s ease-out;
 }
-
 .hero-subtitle {
-  font-size: 18px;
-  color: #666666;
+  font-size: 16px;
+  color: #01225D;
   margin-bottom: 15px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 500;
+  letter-spacing: 3px;
+  font-weight: 600;
 }
-
 .hero-title {
   font-size: 48px;
-  color: #222222;
+  color: #01225D;
   line-height: 1.2;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-weight: 700;
+  position: relative;
 }
-
+.hero-title:after {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(90deg, #01225D, #2E4C9B);
+  bottom: -12px;
+  left: 0;
+  border-radius: 3px;
+}
 .hero-description {
   font-size: 18px;
-  color: #555555;
-  margin-bottom: 30px;
-  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 35px;
+  line-height: 1.7;
 }
-
 .hero-cta-container {
   display: flex;
   gap: 20px;
 }
-
 .hero-primary-btn,
 .hero-secondary-btn {
-  padding: 14px 30px;
-  font-size: 16px;
-  border-radius: 8px;
+  padding: 15px 30px;
+  font-size: 15px;
+  border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid #000000;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
-
 .hero-primary-btn {
-  background-color: #000000;
+  background-color:#F87439;
   color: #ffffff;
+  border: none;
 }
-
 .hero-secondary-btn {
-  background-color: transparent;
-  color: #000000;
+  background-color: #ffffff;
+  color: #01225D;
+  border: 1px solid rgba(1, 34, 93, 0.3);
+  backdrop-filter: blur(4px);
 }
-
 .hero-primary-btn:hover {
-  background-color: #333333;
-  border-color: #333333;
+  background: linear-gradient(135deg, #0A3580 0%, #052B6F 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(1, 34, 93, 0.2);
 }
-
 .hero-secondary-btn:hover {
-  background-color: #f5f5f5;
+  border-color: #01225D;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(1, 34, 93, 0.1);
 }
-
-.hero-image-container {
+.hero-visual {
   flex: 1;
   max-width: 50%;
   position: relative;
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: slideIn 0.8s ease-out;
 }
-
-.hero-image {
-  max-width: 500px;
-  min-width: 200px;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-left: 15px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  object-fit: cover;
-}
-
-.hero-image-overlay {
+.hero-visual-element {
   position: absolute;
-  top: -50px;
-  right: -50px;
-  bottom: -50px;
-  left: -50px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-  border-radius: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(1, 34, 93, 0.15);
+  transition: all 0.5s ease;
+}
+.visual-box-1 {
+  width: 180px;
+  height: 180px;
+  background: linear-gradient(135deg, #01225D 0%, #2E4C9B 100%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  z-index: 3;
+  animation: float 7s ease-in-out infinite;
+}
+.visual-box-2 {
+  width: 140px;
+  height: 140px;
+  background: rgba(231, 235, 244, 0.9);
+  backdrop-filter: blur(10px);
+  top: 30%;
+  left: 60%;
+  transform: rotate(-10deg);
+  z-index: 2;
+  animation: float 8s ease-in-out infinite 1s;
+  border: 1px solid rgba(1, 34, 93, 0.2);
+}
+.visual-box-3 {
+  width: 120px;
+  height: 120px;
+  background: rgba(46, 76, 155, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(46, 76, 155, 0.3);
+  bottom: 25%;
+  left: 30%;
+  transform: rotate(45deg);
+  z-index: 1;
+  animation: float 9s ease-in-out infinite 0.5s;
+} 
+.visual-circle-1 {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #4F68AB 0%, #3C5CA8 100%);
+  border-radius: 50%;
+  bottom: 15%;
+  right: 25%;
+  z-index: 2;
+  animation: float 6s ease-in-out infinite 1.5s;
+}
+
+.visual-circle-2 {
+  width: 40px;
+  height: 40px;
+  background: #E7EBFC;
+  border-radius: 50%;
+  top: 25%;
+  right: 30%;
+  z-index: 4;
+  box-shadow: 0 5px 15px rgba(1, 34, 93, 0.2);
+  animation: float 5s ease-in-out infinite 0.7s;
+}
+
+.hero-visual-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(1, 34, 93, 0.2) 0%, rgba(1, 34, 93, 0) 70%);
+  border-radius: 50%;
+  z-index: 1;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* Decorative elements */
+.accent-shape {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(45deg, rgba(46, 76, 155, 0.1) 0%, rgba(79, 104, 171, 0.1) 100%);
+  border-radius: 24px;
+  transform: rotate(45deg);
+  top: 20%;
+  right: 15%;
   z-index: 0;
+  animation: float 7s ease-in-out infinite 1s;
+}
+
+.hero-circle-1 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color:white;
+  top: -150px;
+  left: -100px;
+  z-index: 0;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero-circle-2 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(79, 104, 171, 0.08) 0%, rgba(46, 76, 155, 0.12) 100%);
+  bottom: -100px;
+  right: 5%;
+  z-index: 0;
+  animation: float 6s ease-in-out infinite reverse;
 }
 
 /* Loading and Error States */
 .hero-loading,
 .hero-error {
   width: 100%;
-  height: 85vh;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  color: #666666;
-  background-color: #f9f9f9;
+  color: #01225D;
+  background: linear-gradient(135deg, #F4F6FC 0%, #E7EBFC 100%);
+}
+
+.hero-loading:before {
+  content: '';
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  border: 2px solid rgba(1, 34, 93, 0.2);
+  border-top: 2px solid #01225D;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Enhanced Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(var(--rotate, 0deg)); }
+  50% { transform: translateY(-15px) rotate(var(--rotate, 0deg)); }
+  100% { transform: translateY(0) rotate(var(--rotate, 0deg)); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+  100% { opacity: 0.5; transform: scale(0.9); }
 }
 
 /* Responsive Styles */
@@ -136,25 +270,27 @@
   .hero-wrapper {
     flex-direction: column;
     text-align: center;
-    padding: 40px 20px;
+    padding: 50px 30px;
   }
 
   .hero-content {
     max-width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
-  .hero-image-container {
-    max-width: 100%;
+  .hero-title:after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .hero-cta-container {
     justify-content: center;
   }
 
-  .hero-image {
-    margin-left: 0;
-    max-width: 100%;
+  .hero-visual {
+    max-width: 80%;
+    height: 300px;
+    margin-top: 20px;
   }
 }
 
@@ -164,7 +300,7 @@
   }
 
   .hero-subtitle {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .hero-description {
@@ -176,9 +312,33 @@
     padding: 12px 24px;
     font-size: 14px;
   }
+  
+  .hero-visual {
+    max-width: 90%;
+    height: 250px;
+  }
+  
+  .visual-box-1 {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .visual-box-2 {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .visual-box-3 {
+    width: 90px;
+    height: 90px;
+  }
 }
 
 @media (max-width: 480px) {
+  .hero-wrapper {
+    padding: 40px 20px;
+  }
+  
   .hero-cta-container {
     flex-direction: column;
     gap: 15px;
@@ -188,4 +348,84 @@
   .hero-secondary-btn {
     width: 100%;
   }
+  
+  .hero-visual {
+    max-width: 100%;
+    height: 200px;
+  }
+  
+  .visual-box-1 {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .visual-box-2 {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .visual-box-3 {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .visual-circle-1 {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .visual-circle-2 {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+
+
+/* Add this to your existing Hero.css file */
+
+/* Background image styles */
+.hero-section {
+  /* Update the existing hero-section class to have position relative */
+  position: relative;
+  z-index: 1;
+}
+
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url( ''); /* Replace with your image path */
+  background-size:contain;
+  background-position: center;
+  z-index: 0;
+}
+
+/* Add a subtle overlay to ensure text readability over the background */
+.hero-bg-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  z-index: 1;
+}
+
+/* Ensure other elements are above the background */
+.hero-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Adjust existing elements to work well with background */
+.hero-content {
+  background: rgba(255, 255, 255, 0.8); /* Optional: add slight background to content for better readability */
+  padding: 30px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px); /* Creates a frosted glass effect */
 }
