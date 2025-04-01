@@ -15,7 +15,7 @@ import Searchbar from './components/Searchbar.jsx'
 import { ToastContainer, toast } from 'react-toastify';
 import Signup from './pages/Signup.jsx'
 import Profile from './pages/Profile'
-import Category from './components/Category.jsx'
+import Category from './pages/Category.jsx'
 import Products from './pages/Products.jsx'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
@@ -39,6 +39,7 @@ const App = () => {
         <Route path='/place-order/:productId' element={<PlaceOrder/>}/>   
         <Route path="/profile/*" element={<Profile/>} />
         <Route path="/products/:category" element={<Products />} />
+        <Route path="/category" element={<Category/>} />
         </Routes>
      <Footer/>
     </div>

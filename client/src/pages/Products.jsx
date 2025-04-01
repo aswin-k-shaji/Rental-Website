@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import ProductItem from "../components/ProductItem";
 import "./Products.css";
 import { ShopeContext } from "../context/ShopeContext";
-import Category from "../components/Category";
 
 const categories = [
   "All", "Car", "Bike", "Electronics", "Machines", "House",
@@ -16,6 +15,7 @@ const Products = () => {
   const { products } = useContext(ShopeContext);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [sortedProducts, setSortedProducts] = useState([]);
   const [sortType, setSortType] = useState("relevant");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentCategory, setCurrentCategory] = useState(category || "All");
@@ -27,7 +27,7 @@ const Products = () => {
     let filtered = products;
 
     if (currentCategory !== "All") {
-      filtered = products.filter((item) => item.category === currentCategory);
+      filtered = filtered.filter((item) => item.category === currentCategory);
     }
 
     if (searchTerm) {
@@ -40,7 +40,7 @@ const Products = () => {
     setCurrentPage(1); // Reset to first page when filter changes
   }, [currentCategory, searchTerm, products]);
 
-  // Sort products
+  // Sort products when sortType or filteredProducts changes
   useEffect(() => {
     let sorted = [...filteredProducts];
 
@@ -50,20 +50,24 @@ const Products = () => {
       sorted.sort((a, b) => b.pricePerDay - a.pricePerDay);
     }
 
-    setFilteredProducts(sorted);
-  }, [sortType]);
+    setSortedProducts(sorted);
+  }, [sortType, filteredProducts]);
 
   // Handle category change
   const handleCategoryChange = (newCategory) => {
-    setCurrentCategory(newCategory);
-    navigate(`/products/${newCategory}`);
+    if (newCategory === "More...") {
+      navigate("/category");
+    } else {
+      setCurrentCategory(newCategory);
+      navigate(`/products/${newCategory}`, { replace: true });
+    }
   };
 
   // Pagination logic
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   return (
     <div className="products-container">
@@ -82,22 +86,17 @@ const Products = () => {
 
       {/* Search & Sort Filters */}
       <div className="filter-section">
-        <div>
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <select onChange={(e) => setSortType(e.target.value)}>
-            <option value="relevant">Sort By: Relevant</option>
-            <option value="low-high">Price: Low to High</option>
-            <option value="high-low">Price: High to Low</option>
-          </select>
-        </div>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select onChange={(e) => setSortType(e.target.value)}>
+          <option value="relevant">Sort By: Relevant</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+        </select>
       </div>
 
       {/* Product List */}
@@ -118,7 +117,7 @@ const Products = () => {
       </div>
 
       {/* Pagination */}
-      {filteredProducts.length > productsPerPage && (
+      {sortedProducts.length > productsPerPage && (
         <div className="pagination">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

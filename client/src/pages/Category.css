@@ -1,0 +1,101 @@
+.category-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .category-page h2 {
+    color: #262152;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .search-box {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    margin: 0 auto 2rem;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .search-box:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 2px 10px rgba(74, 144, 226, 0.2);
+  }
+  
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .category-box {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #444;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+  }
+  
+  .category-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #F87439;
+    background-color: #ffffff;
+    color: #F87439;
+  }
+  
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .category-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    
+    .category-page {
+      padding: 1rem;
+    }
+    
+    .category-box {
+      padding: 1.2rem;
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .category-grid {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .search-box {
+      font-size: 0.9rem;
+      padding: 10px 15px;
+    }
+    
+    .category-page h2 {
+      font-size: 1.5rem;
+    }
+  }

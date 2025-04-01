@@ -4,7 +4,7 @@ import "./Category.css";
 
 const categories = [
   "Car", "Bike", "Electronics", "Machines", "House",
-  "Accessories", "Kitchen", "Function", "Tools","more..."
+  "Accessories", "Kitchen", "Function", "Tools", "more..."
 ];
 
 const Category = () => {
@@ -13,8 +13,12 @@ const Category = () => {
   const location = useLocation();
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    navigate(`/products/${category}`);
+    if (category === "more...") {
+      navigate("/category"); // Navigate to Category page
+    } else {
+      setSelectedCategory(category);
+      navigate(`/products/${category}`);
+    }
   };
 
   // Reset selected category when navigating to another page
