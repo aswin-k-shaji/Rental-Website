@@ -379,15 +379,8 @@
     height: 30px;
   }
 }
-
-
-
-
-/* Add this to your existing Hero.css file */
-
 /* Background image styles */
 .hero-section {
-  /* Update the existing hero-section class to have position relative */
   position: relative;
   z-index: 1;
 }

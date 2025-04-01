@@ -37,7 +37,6 @@ const Category = () => {
           </button>
         ))}
       </div>
-      <hr/>
     </div>
   );
 };
