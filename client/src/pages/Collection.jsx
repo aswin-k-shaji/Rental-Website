@@ -30,7 +30,7 @@ const Collection = () => {
       productsCopy = productsCopy.filter(item => category.includes(item.category));
     }
     setFilterProducts(productsCopy);
-    setCurrentPage(1); // Reset to first page when filters change
+    setCurrentPage(1);
   };
 
   const sortProduct = () => {

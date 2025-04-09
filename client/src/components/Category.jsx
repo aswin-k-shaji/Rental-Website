@@ -8,6 +8,19 @@ const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const [categoriesLoaded, setCategoriesLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!loading && categories.length > 0) {
+      setCategoriesLoaded(true);
+    }
+  }, [loading, categories]);
+
+  useEffect(() => {
+    if (!location.pathname.startsWith("/products/")) {
+      setSelectedCategory(null);
+    }
+  }, [location.pathname]);
 
   const handleCategoryClick = (categoryId) => {
     if (categoryId === "more") {
@@ -18,32 +31,33 @@ const Category = () => {
     }
   };
 
-  useEffect(() => {
-    if (!location.pathname.startsWith("/products/")) {
-      setSelectedCategory(null);
-    }
-  }, [location.pathname]);
-
   return (
     <div className="category-container">
-      {loading ? (
-        <div className="loading-screen">Loading categories...</div>
-      ) : (
-        <div className="category-slider">
-          {categories.slice(0, 9).map((category) => (
-            <button
-              key={category._id}
-              className={`category-item ${selectedCategory === category._id ? "active" : ""}`}
-              onClick={() => handleCategoryClick(category._id)}
-            >
-              {category.name}
-            </button>
-          ))}
-          <button className="category-item" onClick={() => handleCategoryClick("more")}>
-            more...
-          </button>
-        </div>
-      )}
+      <div className={`category-slider ${categoriesLoaded ? "loaded" : ""}`}>
+        {categoriesLoaded ? (
+          <>
+            {categories.slice(0, 9).map((category) => (
+              <button
+                key={category._id}
+                className={`category-item ${selectedCategory === category._id ? "active" : ""}`}
+                onClick={() => handleCategoryClick(category._id)}
+              >
+                {category.name}
+              </button>
+            ))}
+            {categories.length > 9 && (
+              <button className="category-item" onClick={() => handleCategoryClick("more")}>
+                more...
+              </button>
+            )}
+          </>
+        ) : (
+          // Placeholder shimmer elements while loading
+          Array(10).fill().map((_, index) => (
+            <div key={index} className="category-item-placeholder"></div>
+          ))
+        )}
+      </div>
     </div>
   );
 };

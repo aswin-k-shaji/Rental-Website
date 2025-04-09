@@ -6,10 +6,10 @@ import {CategoryProvider} from './context/CategoryContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter> 
+      <CategoryProvider>
   <ShopeContextProvider>
-    <CategoryProvider>
     <App/>
-    </CategoryProvider>
   </ShopeContextProvider>
+  </CategoryProvider>
   </BrowserRouter>
 )
