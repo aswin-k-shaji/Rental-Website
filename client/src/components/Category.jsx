@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { CategoryContext } from "../context/CategoryContext";
 import "./Category.css";
 
+
 const Category = () => {
   const { categories, loading } = useContext(CategoryContext);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -52,7 +53,6 @@ const Category = () => {
             )}
           </>
         ) : (
-          // Placeholder shimmer elements while loading
           Array(10).fill().map((_, index) => (
             <div key={index} className="category-item-placeholder"></div>
           ))

@@ -6,7 +6,7 @@ import {
   fetchCategories, 
   deleteCategory, 
   fetchProductsByCategory,
-  getItemById
+  getCategoryNameById
 } from '../controllers/categoryController.js';
 
 const categoryRouter = express.Router();
@@ -16,7 +16,7 @@ categoryRouter.put('/status', changeCategoryStatus);
 categoryRouter.get('/list', fetchCategories);
 categoryRouter.delete('/:id', deleteCategory);
 categoryRouter.post("/by-category", fetchProductsByCategory);
-categoryRouter.get("/:id", getItemById);
+categoryRouter.post("/getone", getCategoryNameById);
 
 
 export default categoryRouter;

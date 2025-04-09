@@ -21,6 +21,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width:600px;
 }
 
 .thumbnail-images {
@@ -31,7 +32,7 @@
 }
 
 .thumbnail-images img {
-  width: 80px;
+  width: 90px;
   height: 80px;
   cursor: pointer;
   border-radius: 10px;
@@ -45,8 +46,8 @@
 }
 
 .main-image {
-  width: 400px;
-  height: 400px;
+  width: 0px;
+  height: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +61,7 @@
 }
 
 .product-details {
-  flex: 2;
+  flex:2;
   padding: 1rem;
   padding-top: 50px;
 }

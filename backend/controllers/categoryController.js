@@ -78,36 +78,49 @@ export const fetchProductsByCategory = async (req, res) => {
   try {
     const { categoryId } = req.body;
 
-    if (!categoryId) {
-      return res.status(400).json({ message: "Category ID is required" });
-    }
+    let products;
 
-    const category = await Category.findById(categoryId);
-    if (!category) {
-      return res.status(404).json({ message: "Category not found" });
-    }
+    if (!categoryId || categoryId === "All") {
+      // Fetch all products if no specific category is provided
+      products = await itemModel.find().populate("category");
+    } else {
+      // Fetch products for a specific category
+      const category = await Category.findById(categoryId);
 
-    const products = await itemModel.find({ category: categoryId }).populate("category");
+      if (!category) {
+        return res.status(404).json({ message: "Category not found" });
+      }
+
+      products = await itemModel.find({ category: categoryId }).populate("category");
+    }
 
     res.status(200).json(products);
   } catch (error) {
+    console.error("Error fetching products:", error);
     res.status(500).json({ message: "Failed to fetch products", error: error.message });
   }
 };
 
 
-export const getItemById = async (req, res) => {
-    try {
-        const item = await itemModel.findById(req.params.id).populate("category", "name");
-        if (!item) {
-            return res.status(404).json({ message: "Item not found" });
-        }
-        res.json(item);
-    } catch (error) {
-        console.error("Error fetching item:", error);
-        res.status(500).json({ message: "Server error" });
-    }
-};
+export const getCategoryNameById = async (req, res) => {
+  try {
+    const { categoryId } = req.body;
 
+    if (!categoryId) {
+      return res.status(400).json({ message: "Category ID is required" });
+    }
+
+    const category = await Category.findById(categoryId);
+
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    res.status(200).json({ name: category.name });
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 
