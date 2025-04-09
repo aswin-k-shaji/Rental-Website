@@ -48,6 +48,7 @@ const Product = () => {
             currentDate.setDate(currentDate.getDate() + 1);
           }
         });
+        const product = await Product.findById(productId).populate("category", "name");
 
         setReservedDates(dates);
       } catch (error) {
@@ -90,7 +91,7 @@ const Product = () => {
 
   const tileClassName = ({ date, view }) => {
     if (view === 'month') {
-      const formattedDate = date.toISOString().split('T')[0]; // Convert date to YYYY-MM-DD
+      const formattedDate = date.toISOString().split('T')[0];
       if (reservedDates.includes(formattedDate)) {
         return 'reserved-date';
       }
@@ -138,6 +139,7 @@ const Product = () => {
           <div className="product-price">{currency}{productData.pricePerDay}</div>
           <p className="product-contact">Contact: {productData.contact}</p>
           <p className="product-category">Category: {productData.category}</p>
+          <p className="product-category">Category: {productData.category?.name || "Unknown"}</p>
           <p style={{color:'red'}} className="product-category">Available: {productData.Available}/{productData.NumberOfItems}</p>
           <p className="product-owner">
             Owner: {typeof productData.owner === 'object' ? `${productData.owner.name} (${productData.owner.email})` : productData.owner}

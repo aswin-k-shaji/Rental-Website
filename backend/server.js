@@ -6,8 +6,9 @@ import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 import orderRouter from "./routes/orderRoute.js";
-import reviewRouter from "./routes/reviewRoutes.js"; // ✅ Import review routes
+import reviewRouter from "./routes/reviewRoutes.js";
 import messageRouter from "./routes/messageRoute.js";
+import categoryRouter from "./routes/categoryRoute.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -26,7 +27,7 @@ app.use('/api/product', productRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/message', messageRouter);
-
+app.use('/api/category', categoryRouter)
 
 // Test API Route
 app.get('/', (req, res) => {

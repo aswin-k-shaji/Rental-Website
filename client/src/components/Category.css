@@ -17,14 +17,14 @@
   }
   
   .category-item {
-    padding: 10px 15px;
+    padding: 9px 14px;
     border: none;
     background-color: #eeebeb;
     cursor: pointer;
     color: #000000;
     width:120px;
     border:1px solid rgb(215, 215, 215);
-    font-size: 16px;
+    font-size: 14.5px;
     border-radius: 9px;
     transition: 0.3s ease;
   }

@@ -1,32 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CategoryContext } from "../context/CategoryContext";
 import "./Category.css";
 
-const categories = [
-  "Car", "Bike", "Electronics", "Machines", "House",
-  "Accessories", "Kitchen", "Function", "Tools", "Fashion",
-  "Sports", "Books", "Music", "Furniture", "Toys"
-];
-
 const Category = () => {
+  const { categories } = useContext(CategoryContext);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  const handleCategoryClick = (category) => {
-    navigate(`/products/${category}`);
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/products/${categoryId}`);
   };
 
   const filteredCategories = categories.filter((cat) =>
-    cat.toLowerCase().includes(searchTerm.toLowerCase())
+    cat.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="category-page">
-      <h2>
-        SELECT A CATEGORY
-      </h2>
-
-      {/* Search Box */}
+      <h2>SELECT A CATEGORY</h2>
       <input
         type="text"
         placeholder="Search category..."
@@ -34,17 +26,15 @@ const Category = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
-      {/* Category Boxes */}
       <div className="category-grid">
         {filteredCategories.length > 0 ? (
           filteredCategories.map((category) => (
             <div
-              key={category}
+              key={category._id}
               className="category-box"
-              onClick={() => handleCategoryClick(category)}
+              onClick={() => handleCategoryClick(category._id)}
             >
-              {category}
+              {category.name}
             </div>
           ))
         ) : (

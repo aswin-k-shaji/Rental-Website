@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './add.css';
 import { assets } from '../assets/assets';
 import axios from 'axios';
@@ -19,7 +19,27 @@ const Additem = () => {
   const [contact, setContact] = useState('');
   const [numberOfItems, setNumberOfItems] = useState('');
 
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // Fetch categories from the backend
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get(`${backendUrl}/api/category/list`);
+        if (res.status === 200) {
+          setCategories(res.data.filter(category => category.isActive)); // Filter active categories
+        } else {
+          toast.error("Failed to fetch categories!");
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Error fetching categories from backend!");
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -58,7 +78,6 @@ const Additem = () => {
 
       if (res.data.success) {
         toast.success(res.data.message);
-        // Clear form fields
         setTitle("");
         setDescription("");
         setCategory("");
@@ -165,16 +184,12 @@ const Additem = () => {
             className="add-select"
             disabled={loading}
           >
-            <option value="Car">Car</option>
-            <option value="Bike">Bike</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Machines">Machines</option>
-            <option value="House">House/Rooms</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Kitchen">Kitchen</option>
-            <option value="Function">Function</option>
-            <option value="Tools">Tool</option>
-
+            <option value="">Select a category</option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
+            ))}
           </select>
         </div>
 

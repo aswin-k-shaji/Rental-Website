@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CategoryContext } from "../context/CategoryContext";
 import "./Category.css";
 
-const categories = [
-  "Car", "Bike", "Electronics", "Machines", "House",
-  "Accessories", "Kitchen", "Function", "Tools", "more..."
-];
-
 const Category = () => {
+  const { categories, loading } = useContext(CategoryContext);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleCategoryClick = (category) => {
-    if (category === "more...") {
-      navigate("/category"); // Navigate to Category page
+  const handleCategoryClick = (categoryId) => {
+    if (categoryId === "more") {
+      navigate("/category");
     } else {
-      setSelectedCategory(category);
-      navigate(`/products/${category}`);
+      setSelectedCategory(categoryId);
+      navigate(`/products/${categoryId}`);
     }
   };
 
-  // Reset selected category when navigating to another page
   useEffect(() => {
     if (!location.pathname.startsWith("/products/")) {
       setSelectedCategory(null);
@@ -30,17 +26,24 @@ const Category = () => {
 
   return (
     <div className="category-container">
-      <div className="category-slider">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`category-item ${selectedCategory === category ? "active" : ""}`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
+      {loading ? (
+        <div className="loading-screen">Loading categories...</div>
+      ) : (
+        <div className="category-slider">
+          {categories.slice(0, 9).map((category) => (
+            <button
+              key={category._id}
+              className={`category-item ${selectedCategory === category._id ? "active" : ""}`}
+              onClick={() => handleCategoryClick(category._id)}
+            >
+              {category.name}
+            </button>
+          ))}
+          <button className="category-item" onClick={() => handleCategoryClick("more")}>
+            more...
           </button>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
