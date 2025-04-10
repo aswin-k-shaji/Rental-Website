@@ -23,7 +23,6 @@
 .filter-section {
   margin-bottom: 2rem;
   background-color: var(--card-bg);
-  padding: 1.5rem;
   border-radius: 10px;
   box-shadow: var(--shadow);
   display: flex;
@@ -34,11 +33,12 @@
 .filter-section input[type="text"] {
   width: 500px;
   padding: 0.8rem 1rem;
+  margin: 8px;
   border: 2px solid var(--border-color);
   border-radius: 6px;
   font-size: 16px;
+  height:14px;
   transition: border-color 0.2s;
-  margin-bottom: 1.5rem;
 }
 
 .filter-section input[type="text"]:focus {
@@ -47,14 +47,16 @@
 }
 
 .filter-section select {
-  width: 100%;
+  width: 200px;
+  margin: 8px;
   padding: 0.8rem 1rem;
   border: 2px solid var(--border-color);
   border-radius: 6px;
+  margin-right:10px;
+  color: #a8a8a8;
   font-size: 16px;
   background-color: var(--card-bg);
   cursor: pointer;
-  margin-bottom: 1.5rem;
 }
 
 .filter-section select:focus {
@@ -66,12 +68,12 @@
 .category-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.7rem;
   padding-bottom:15px;
 }
 
 .category-filters button {
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.1rem;
   background-color: var(--background);
   border: 2px solid var(--border-color);
   border-radius: 9px;

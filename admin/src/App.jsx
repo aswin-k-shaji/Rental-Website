@@ -36,7 +36,7 @@ const App = () => {
           <hr />
           <div style={{ display: "flex", marginTop: '30px' }}>
             <Sidebar />
-            <div style={{ marginLeft: "40px", flexGrow: 1, paddingTop: '7px' }}>
+            <div style={{ marginLeft: "20px", flexGrow: 1, paddingTop: '7px' }}>
               <Routes>
                 <Route path='/List' element={<List token={token} />} />
                 <Route path='/add' element={<Add token={token} />} />

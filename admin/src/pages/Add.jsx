@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './add.css';
 import { assets } from '../assets/assets';
 import axios from 'axios';
@@ -17,8 +17,29 @@ const Add = ({ token }) => {
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
   const [contact, setContact] = useState('');
+  const [numberOfItems, setNumberOfItems] = useState('');
 
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // Fetch categories from the backend
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get(`${backendUrl}/api/category/list`);
+        if (res.status === 200) {
+          setCategories(res.data.filter(category => category.isActive)); // Filter active categories
+        } else {
+          toast.error("Failed to fetch categories!");
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Error fetching categories from backend!");
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -29,12 +50,27 @@ const Add = ({ token }) => {
     try {
       const formData = new FormData();
 
+      // Retrieve user ID from local storage if not using token
+      const userId = localStorage.getItem("userId");
+      if (!userId && !token) {
+        toast.error("User not logged in!");
+        setLoading(false);
+        return;
+      }
+
       formData.append('title', title);
       formData.append('description', description);
       formData.append('pricePerDay', price);
       formData.append('category', category);
       formData.append('contact', contact);
       formData.append('location', location);
+      formData.append('NumberOfItems', numberOfItems);
+      formData.append('Available', numberOfItems); // Set Available to same value as NumberOfItems
+      
+      // Add owner if available from localStorage
+      if (userId) {
+        formData.append('owner', userId);
+      }
 
       image1 && formData.append('image1', image1);
       image2 && formData.append('image2', image2);
@@ -43,7 +79,9 @@ const Add = ({ token }) => {
 
       console.log('Submitting form...');
 
-      const res = await axios.post(backendUrl + '/api/product/add', formData, { headers: { token } });
+      // Use token if provided as prop, otherwise send without headers
+      const config = token ? { headers: { token } } : {};
+      const res = await axios.post(backendUrl + '/api/product/add', formData, config);
 
       if (res.data.success) {
         toast.success(res.data.message);
@@ -54,6 +92,7 @@ const Add = ({ token }) => {
         setContact('');
         setLocation('');
         setPrice('');
+        setNumberOfItems('');
         setImage1(false);
         setImage2(false);
         setImage3(false);
@@ -63,7 +102,7 @@ const Add = ({ token }) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(error.message);
+      toast.error(error.message || "Something went wrong!");
     } finally {
       setLoading(false);
     }
@@ -130,6 +169,20 @@ const Add = ({ token }) => {
         />
       </div>
 
+      <div>
+        <p className="add-label">Quantity</p>
+        <input
+          onChange={(e) => setNumberOfItems(e.target.value)}
+          value={numberOfItems}
+          type="number"
+          min="1"
+          placeholder="Number of Items"
+          className="add-input"
+          required
+          disabled={loading}
+        />
+      </div>
+
       <div className="add-row">
         <div>
           <p className="add-label">Category</p>
@@ -137,13 +190,15 @@ const Add = ({ token }) => {
             onChange={(e) => setCategory(e.target.value)}
             value={category}
             className="add-select"
+            required
             disabled={loading}
           >
-            <option value="Car">Car</option>
-            <option value="Bike">Bike</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Machines">Machines</option>
-            <option value="House">House/Rooms</option>
+            <option value="">Select a category</option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
+            ))}
           </select>
         </div>
 
