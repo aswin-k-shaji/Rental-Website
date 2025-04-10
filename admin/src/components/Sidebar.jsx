@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
 import { assets } from '../assets/assets';
 
 const Sidebar = () => {
-  const [openDropdown, setOpenDropdown] = useState(null);
+  // Retrieve the saved dropdown state from localStorage
+  const [openDropdown, setOpenDropdown] = useState(localStorage.getItem('openDropdown') || null);
 
   const toggleDropdown = (menu) => {
-    setOpenDropdown(openDropdown === menu ? null : menu);
+    const newDropdown = openDropdown === menu ? null : menu;
+    setOpenDropdown(newDropdown);
+    // Save the new dropdown state to localStorage
+    localStorage.setItem('openDropdown', newDropdown);
+  };
+
+  useEffect(() => {
+    // Retrieve the active submenu from localStorage and keep it open
+    const activeMenu = localStorage.getItem('activeMenu');
+    if (activeMenu) {
+      setOpenDropdown(activeMenu);
+    }
+  }, []);
+
+  const handleSubmenuClick = (menu) => {
+    localStorage.setItem('activeMenu', menu);
   };
 
   return (
@@ -27,11 +43,19 @@ const Sidebar = () => {
             <span>Items</span>
           </div>
           <div className={`submenu ${openDropdown === 'items' ? 'open' : ''}`}>
-            <NavLink to="/List" className="submenu-item">
+            <NavLink 
+              to="/List" 
+              className="submenu-item"
+              onClick={() => handleSubmenuClick('items')}
+            >
               <span>📄</span> View Items
             </NavLink>
-            <NavLink to="/add" className="submenu-item">
-              <span>➕</span> Add Item
+            <NavLink 
+              to="/new" 
+              className="submenu-item"
+              onClick={() => handleSubmenuClick('items')}
+            >
+              <span>➕</span>New Category
             </NavLink>
           </div>
         </div>
@@ -45,7 +69,11 @@ const Sidebar = () => {
             <span>Orders</span>
           </div>
           <div className={`submenu ${openDropdown === 'orders' ? 'open' : ''}`}>
-            <NavLink to="/orders" className="submenu-item">
+            <NavLink 
+              to="/orders" 
+              className="submenu-item"
+              onClick={() => handleSubmenuClick('orders')}
+            >
               <span>📄</span> View Orders
             </NavLink>
           </div>
@@ -60,11 +88,16 @@ const Sidebar = () => {
             <span>Users</span>
           </div>
           <div className={`submenu ${openDropdown === 'users' ? 'open' : ''}`}>
-            <NavLink to="/users" className="submenu-item">
+            <NavLink 
+              to="/users" 
+              className="submenu-item"
+              onClick={() => handleSubmenuClick('users')}
+            >
               <span>👥</span> View Users
             </NavLink>
           </div>
         </div>
+
         <NavLink to="/Message" className="menu-item">
           <img src={assets.home || '🏠'} alt="" />
           <span>Message</span>
